@@ -744,7 +744,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
 </div>
 
 <!-- ═══ TELA AUTH ═══ -->
-<div id="telaAuth" style="display:flex;">
+<div id="telaAuth" style="display:none;">
   <div class="auth-wrap">
     <div class="auth-brand">
       <div class="auth-brand-icon">🗣️</div>
@@ -1746,27 +1746,19 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
   </div>
 </div>
 
-<!-- ═══ BOAS-VINDAS — Animação Cinematográfica ═══ -->
+<!-- ═══ BOAS-VINDAS — Animação (só visual, não interfere no auth) ═══ -->
 <script>
 (function() {
-  let boasVindasConcluidas = false;
-  let firebaseCallback = null;
+  let concluida = false;
 
-  window._bvOnConcluir = function(cb) {
-    if (boasVindasConcluidas) { cb(); }
-    else { firebaseCallback = cb; }
-  };
-
+  // Apenas esconde a tela de boas-vindas — sem mostrar loading
   function concluir() {
-    if (boasVindasConcluidas) return;
-    boasVindasConcluidas = true;
+    if (concluida) return;
+    concluida = true;
     const tela = document.getElementById('telaBoasVindas');
+    if (!tela) return;
     tela.classList.add('saindo');
-    setTimeout(() => {
-      tela.style.display = 'none';
-      document.getElementById('loadingOverlay').style.display = 'flex';
-      if (firebaseCallback) firebaseCallback();
-    }, 720);
+    setTimeout(() => { tela.style.display = 'none'; }, 720);
   }
 
   window.pularBoasVindas = concluir;
@@ -1841,7 +1833,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
           }
         }
       }
-      if (!boasVindasConcluidas) raf = requestAnimationFrame(draw);
+      if (!concluida) raf = requestAnimationFrame(draw);
     }
     draw();
   }
@@ -1863,9 +1855,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     setTimeout(concluir, 4200);
   });
 
-  // Timeout de segurança: 5s
-  // Timeout de segurança: avança animação em 4.5s no máximo
-  const bvSafetyTimeout = setTimeout(concluir, 4500);
+  // Auto-avança animação em 4s
+  setTimeout(concluir, 4000);
 })();
 </script>
 
@@ -2001,33 +1992,36 @@ window.trocarAbaAuth = function(modo) {
 };
 
 // ── AUTH ──
-function mostrarLogin() {
-  $('telaAuth').style.display    = 'flex';
-  $('telaSistema').style.display = 'none';
-  $('erroAuth').innerText = '';
-  $('okAuth').innerText   = '';
-}
-
-function entrarNoSistema(user) {
+// ══════════════════════════════════════════════
+// CONTROLE DE TELAS — fonte única da verdade
+// ══════════════════════════════════════════════
+function mostrarTela(qual) {
+  // Esconde todas
   $('telaAuth').style.display    = 'none';
-  $('telaSistema').style.display = 'grid';
-  $('nomeExib').innerText    = user.displayName || user.email.split('@')[0];
-  $('emailExibSB').innerText = user.email;
+  $('telaSistema').style.display = 'none';
+  $('loadingOverlay').style.display = 'none';
+  // Mostra a certa
+  if (qual === 'login')   $('telaAuth').style.display    = 'flex';
+  if (qual === 'sistema') $('telaSistema').style.display = 'grid';
+  if (qual === 'loading') $('loadingOverlay').style.display = 'flex';
 }
 
-// onAuthStateChanged: apenas verifica se já está logado ao carregar
-// Se logado → pula direto pro sistema (sem animação)
-// Se não logado → login já está visível, não faz nada
+// Mostra loading enquanto Firebase inicializa
+mostrarTela('loading');
+
+// onAuthStateChanged é a ÚNICA função que decide qual tela mostrar
+// Chamado automaticamente: na carga da página E após qualquer login/logout
 onAuthStateChanged(auth, async user => {
   if (user) {
-    // Usuário já logado — vai direto pro sistema sem animação
-    $('telaAuth').style.display    = 'none';
-    $('telaSistema').style.display = 'grid';
     $('nomeExib').innerText    = user.displayName || user.email.split('@')[0];
     $('emailExibSB').innerText = user.email;
+    mostrarTela('sistema');
     await carregarPacientes();
+  } else {
+    mostrarTela('login');
+    $('erroAuth').innerText = '';
+    $('okAuth').innerText   = '';
   }
-  // Se não logado: login já está visível, não precisa fazer nada
 });
 
 $('btnAuthAcao').addEventListener('click', acaoAuth);
@@ -2055,28 +2049,18 @@ async function acaoAuth() {
       if (senha !== senha2)  { $('erroAuth').innerText = '⚠️ As senhas não conferem.'; throw null; }
       const cred = await createUserWithEmailAndPassword(auth, email, senha);
       if (nome) await updateProfile(cred.user, { displayName: nome });
-      $('okAuth').innerText = '✅ Conta criada! Entrando...';
-      await new Promise(r => setTimeout(r, 800));
-      entrarNoSistema(cred.user);
-      await carregarPacientes();
+      // onAuthStateChanged vai resolver a entrada no sistema
     } else {
-      const cred = await signInWithEmailAndPassword(auth, email, senha);
-      // Mostra animação de boas-vindas após login
-      $('telaAuth').style.display = 'none';
-      const bv = document.getElementById('telaBoasVindas');
-      bv.style.display = 'flex';
-      window.pularBoasVindas();
-      setTimeout(async () => {
-        entrarNoSistema(cred.user);
-        await carregarPacientes();
-      }, 900);
+      await signInWithEmailAndPassword(auth, email, senha);
+      // onAuthStateChanged vai resolver a entrada no sistema
     }
   } catch (err) {
-    if (err) $('erroAuth').innerText = traduzirErro(err.code);
+    if (err) {
+      $('erroAuth').innerText = traduzirErro(err.code);
+      $('btnAuthAcao').disabled = false;
+      $('btnAuthAcao').innerHTML = modoAuth === 'login' ? '🔑 Entrar no Sistema' : '✉️ Criar minha conta';
+    }
   }
-
-  $('btnAuthAcao').disabled = false;
-  $('btnAuthAcao').innerHTML = modoAuth === 'login' ? '🔑 Entrar no Sistema' : '✉️ Criar minha conta';
 }
 
 function traduzirErro(code) {
@@ -2093,7 +2077,10 @@ function traduzirErro(code) {
   return m[code] || '❌ Erro: ' + (code || 'desconhecido');
 }
 
-$('btnSair').addEventListener('click', async () => { await signOut(auth); });
+$('btnSair').addEventListener('click', async () => {
+  await signOut(auth);
+  // onAuthStateChanged vai mostrar o login automaticamente
+});
 $('btnPerfil').addEventListener('click', () => { window.fecharSidebarMobile(); abrirPerfil(); });
 
 // ── GOOGLE AUTH ──
@@ -2104,6 +2091,7 @@ $('btnGoogle').addEventListener('click', async () => {
   $('btnGoogle').innerHTML = '<span class="spinner"></span> Aguarde...';
   try {
     await signInWithPopup(auth, googleProvider);
+    // onAuthStateChanged vai resolver a entrada no sistema
   } catch(err) {
     $('erroAuth').innerText = traduzirErro(err.code);
     $('btnGoogle').disabled = false;
@@ -2438,7 +2426,8 @@ function abrirPerfil() {
 window.salvarPerfil = salvarPerfil;
 window.abrirPerfil  = abrirPerfil;
 
-const CLINICA_NOME = 'Fono Facilita';
+// getClinicaNome() dinâmico via perfil
+function getClinicaNome() { return getPerfil().clinica || 'Fono Facilita'; }
 
 function wppResolver(txt, pac) {
   const hoje = new Date().toLocaleDateString('pt-BR');
@@ -2447,7 +2436,7 @@ function wppResolver(txt, pac) {
     .replace(/\{nome\}/g, pac.nome || '')
     .replace(/\{responsavel\}/g, resp)
     .replace(/\{data\}/g, hoje)
-    .replace(/\{clinica\}/g, CLINICA_NOME);
+    .replace(/\{clinica\}/g, getClinicaNome());
 }
 
 function abrirModalWhatsApp(pac) {
@@ -2477,7 +2466,7 @@ Passando para lembrar sobre o acompanhamento fonoaudiológico de *{nome}*.
 
 Qualquer dúvida, estou à disposição!
 
-_${CLINICA_NOME}_`;
+_${getClinicaNome()}_`;
   atualizarPreviewWpp();
 };
 
@@ -2489,7 +2478,7 @@ Gostaríamos de agendar o *retorno* de *{nome}*.
 
 Por favor, entre em contato para confirmarmos a data e horário que melhor se encaixa para vocês.
 
-_${CLINICA_NOME}_`;
+_${getClinicaNome()}_`;
   atualizarPreviewWpp();
 };
 
@@ -2501,7 +2490,7 @@ Seja muito bem-vindo(a)! Estamos felizes em ter *{nome}* em nosso atendimento.
 
 Em caso de dúvidas ou para remarcar sessões, fique à vontade para nos contatar.
 
-_${CLINICA_NOME}_`;
+_${getClinicaNome()}_`;
   atualizarPreviewWpp();
 };
 
@@ -3080,14 +3069,14 @@ async function gerarPDF(p) {
   ]);
 
   // ── EVOLUÇÃO ──
-  if (p.evolucoes && p.evolucoes.length) {
+  if (p.evolucao && p.evolucao.length) {
     novaPagSeNec(16);
     doc.setFillColor(22,40,34); doc.roundedRect(10, y-5, W-20, 10, 2, 2, 'F');
     doc.setFillColor(52,211,153); doc.roundedRect(10, y-5, 4, 10, 1, 1, 'F');
     doc.setTextColor(180,255,220); doc.setFont('helvetica','bold'); doc.setFontSize(9.5);
     doc.text('EVOLUÇÃO DO PACIENTE (' + p.evolucoes.length + ' sessões)', 18, y+1.5);
     y += 10;
-    p.evolucoes.forEach((ev, idx) => {
+    p.evolucao.forEach((ev, idx) => {
       novaPagSeNec(12);
       const dataEvol = ev.data || '—';
       doc.setFillColor(18,25,40); doc.rect(14, y-3, W-28, 7, 'F');
