@@ -39,6 +39,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:var(-
 input::placeholder,textarea::placeholder{color:var(--txt3);}
 select option{background:var(--bg2);}
 textarea{resize:vertical;min-height:78px;line-height:1.55;}
+
+/* ── PROTOCOLOS — ocultos por padrão ── */
+[id^="abaProtocolo"]{display:none;}
+
 button{
   font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;
   cursor:pointer;border:none;border-radius:var(--radius);
@@ -80,10 +84,11 @@ button:active{transform:scale(.975);}
 .auth-brand p{font-size:12px;color:var(--txt3);font-weight:500;margin-top:2px;}
 
 /* tabs login/cadastro */
-.auth-tabs{display:flex;gap:0;margin-bottom:22px;border-radius:10px;overflow:hidden;border:1.5px solid var(--border);}
+.auth-tabs{display:flex;gap:0;margin-bottom:22px;border-radius:10px;overflow:hidden;border:1.5px solid var(--border);min-height:44px;}
 .auth-tab{
-  flex:1;padding:11px;text-align:center;font-size:13px;font-weight:700;cursor:pointer;
+  flex:1;min-width:0;padding:11px 8px;text-align:center;font-size:13px;font-weight:700;cursor:pointer;
   background:var(--bg3);color:var(--txt2);transition:.16s;border:none;border-radius:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .auth-tab.ativa{background:linear-gradient(135deg,var(--acc2),var(--acc3));color:#fff;}
 
@@ -942,6 +947,22 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
             <div class="aba-btn" onclick="mudarAba(6)" id="ab6">7. Escolar/Exames</div>
             <div class="aba-btn" onclick="mudarAba(7)" id="ab7" style="border-color:rgba(124,158,255,.3);color:var(--acc);">🔤 ABFW</div>
             <div class="aba-btn" onclick="mudarAba(8)" id="ab8" style="border-color:rgba(52,211,153,.3);color:var(--green);">🗣️ PALO</div>
+            <!-- 17 Protocolos -->
+            <div class="aba-btn" onclick="mudarAba(10)" id="ab10" style="border-color:rgba(251,191,36,.3);color:var(--amber);">📖 TVIP</div>
+            <div class="aba-btn" onclick="mudarAba(11)" id="ab11" style="border-color:rgba(251,191,36,.3);color:var(--amber);">👶 Denver</div>
+            <div class="aba-btn" onclick="mudarAba(12)" id="ab12" style="border-color:rgba(244,114,182,.3);color:var(--pink);">👄 MBGR</div>
+            <div class="aba-btn" onclick="mudarAba(13)" id="ab13" style="border-color:rgba(244,114,182,.3);color:var(--pink);">😮 AMIOFE</div>
+            <div class="aba-btn" onclick="mudarAba(14)" id="ab14" style="border-color:rgba(244,114,182,.3);color:var(--pink);">🦷 OMES</div>
+            <div class="aba-btn" onclick="mudarAba(15)" id="ab15" style="border-color:rgba(124,158,255,.3);color:var(--acc);">🎙️ CAPE-V</div>
+            <div class="aba-btn" onclick="mudarAba(16)" id="ab16" style="border-color:rgba(124,158,255,.3);color:var(--acc);">🔊 GRBAS</div>
+            <div class="aba-btn" onclick="mudarAba(17)" id="ab17" style="border-color:rgba(52,211,153,.3);color:var(--green);">💬 SSI</div>
+            <div class="aba-btn" onclick="mudarAba(18)" id="ab18" style="border-color:rgba(248,113,113,.3);color:var(--red);">🍽️ PARD</div>
+            <div class="aba-btn" onclick="mudarAba(19)" id="ab19" style="border-color:rgba(248,113,113,.3);color:var(--red);">😮‍💨 EAT-10</div>
+            <div class="aba-btn" onclick="mudarAba(20)" id="ab20" style="border-color:rgba(248,113,113,.3);color:var(--red);">🥄 FOIS</div>
+            <div class="aba-btn" onclick="mudarAba(21)" id="ab21" style="border-color:rgba(52,211,153,.3);color:var(--green);">👂 Audiometria</div>
+            <div class="aba-btn" onclick="mudarAba(22)" id="ab22" style="border-color:rgba(52,211,153,.3);color:var(--green);">📡 Imitanciometria</div>
+            <div class="aba-btn" onclick="mudarAba(23)" id="ab23" style="border-color:rgba(52,211,153,.3);color:var(--green);">🧠 BERA/PEATE</div>
+            <div class="aba-btn" onclick="mudarAba(24)" id="ab24" style="border-color:rgba(52,211,153,.3);color:var(--green);">🔉 PAC</div>
             <div class="aba-btn" onclick="mudarAba(9)" id="ab9" style="border-color:rgba(244,114,182,.3);color:var(--pink);">📈 Evolução <span id="evolBadgeBtn" style="display:none;background:rgba(244,114,182,.2);color:var(--pink);border-radius:99px;padding:1px 7px;font-size:10.5px;margin-left:3px;"></span></div>
           </div>
 
@@ -1202,6 +1223,257 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
                 <div class="fgrp"><label>Classificação geral</label><select id="paloClassif"><option value="">Não classificado</option><option>Dentro do esperado para a idade</option><option>Abaixo do esperado — leve</option><option>Abaixo do esperado — moderado</option><option>Abaixo do esperado — grave</option></select></div>
               </div>
               <div class="fgrp"><label>Observações e hipótese diagnóstica do PALO</label><textarea id="paloObs" placeholder="Impressão geral, perfil linguístico, sugestões de intervenção..."></textarea></div>
+            </div>
+
+
+            <!-- ══ PROTOCOLOS — ABA 10: TVIP ══ -->
+            <div class="aba-conteudo" id="abaProtocolo10">
+              <div class="sec-title">📖 TVIP — Teste de Vocabulário por Imagens Peabody</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia vocabulário receptivo e compreensão verbal.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Idade cronológica</label><input type="text" id="tvipIdade" placeholder="Ex: 6 anos e 2 meses"></div>
+                <div class="fgrp"><label>Escore bruto</label><input type="number" id="tvipEscore" placeholder="Ex: 87" min="0"></div>
+                <div class="fgrp"><label>Escore padrão</label><input type="number" id="tvipEscorePadrao" placeholder="Ex: 95" min="0"></div>
+                <div class="fgrp"><label>Percentil</label><input type="number" id="tvipPercentil" placeholder="Ex: 37" min="0" max="100"></div>
+                <div class="fgrp"><label>Classificação</label><select id="tvipClassif"><option value="">Não classificado</option><option>Muito Superior</option><option>Superior</option><option>Acima da média</option><option>Média</option><option>Abaixo da média</option><option>Limítrofe</option><option>Muito abaixo da média</option></select></div>
+                <div class="fgrp"><label>Nível de início (basal)</label><input type="text" id="tvipBasal" placeholder="Ex: Placa 30"></div>
+                <div class="fgrp"><label>Nível de teto (teto)</label><input type="text" id="tvipTeto" placeholder="Ex: Placa 65"></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — TVIP</label><textarea id="tvipObs" placeholder="Desempenho geral, atenção, cooperação, hipótese diagnóstica..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 11: Denver ══ -->
+            <div class="aba-conteudo" id="abaProtocolo11">
+              <div class="sec-title">👶 Denver II — Triagem do Desenvolvimento</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia desenvolvimento infantil, linguagem e habilidades cognitivas.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Área Pessoal-Social</label><select id="denverPS"><option value="">Não avaliado</option><option>Adequado</option><option>Cautela</option><option>Atrasado</option></select></div>
+                <div class="fgrp"><label>Área Motor Fino-Adaptativo</label><select id="denverMF"><option value="">Não avaliado</option><option>Adequado</option><option>Cautela</option><option>Atrasado</option></select></div>
+                <div class="fgrp"><label>Área Linguagem</label><select id="denverLing"><option value="">Não avaliado</option><option>Adequado</option><option>Cautela</option><option>Atrasado</option></select></div>
+                <div class="fgrp"><label>Área Motor Grosso</label><select id="denverMG"><option value="">Não avaliado</option><option>Adequado</option><option>Cautela</option><option>Atrasado</option></select></div>
+                <div class="fgrp"><label>Resultado geral</label><select id="denverGeral"><option value="">Não classificado</option><option>Normal</option><option>Suspeito</option><option>Não testável</option></select></div>
+                <div class="fgrp"><label>Número de cautelas</label><input type="number" id="denverCautelas" placeholder="Ex: 2" min="0"></div>
+                <div class="fgrp"><label>Número de atrasos</label><input type="number" id="denverAtrasos" placeholder="Ex: 1" min="0"></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — Denver</label><textarea id="denverObs" placeholder="Comportamento durante avaliação, itens críticos, recomendações..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 12: MBGR ══ -->
+            <div class="aba-conteudo" id="abaProtocolo12">
+              <div class="sec-title">👄 MBGR — Protocolo de Avaliação Miofuncional Orofacial</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia motricidade orofacial, língua, lábios, mastigação, respiração e deglutição.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Morfologia facial</label><select id="mbgrMorfologia"><option value="">Não avaliado</option><option>Adequada</option><option>Alterada</option></select></div>
+                <div class="fgrp"><label>Tônus labial</label><select id="mbgrTonoLabial"><option value="">Não avaliado</option><option>Normal</option><option>Hipotônico</option><option>Hipertônico</option></select></div>
+                <div class="fgrp"><label>Tônus lingual</label><select id="mbgrTonoLingual"><option value="">Não avaliado</option><option>Normal</option><option>Hipotônico</option><option>Hipertônico</option></select></div>
+                <div class="fgrp"><label>Postura de língua em repouso</label><select id="mbgrLinguaRepouso"><option value="">Não avaliado</option><option>Adequada</option><option>Interposta</option><option>Protruída</option><option>Lateral</option></select></div>
+                <div class="fgrp"><label>Mastigação</label><select id="mbgrMastigacao"><option value="">Não avaliado</option><option>Normal bilateral</option><option>Unilateral</option><option>Anterior</option><option>Disfuncional</option></select></div>
+                <div class="fgrp"><label>Deglutição</label><select id="mbgrDeglutição"><option value="">Não avaliado</option><option>Adequada</option><option>Com interposição lingual</option><option>Com contração de bucinador</option><option>Alterada</option></select></div>
+                <div class="fgrp"><label>Respiração</label><select id="mbgrRespiracao"><option value="">Não avaliado</option><option>Nasal</option><option>Oronasal</option><option>Oral</option></select></div>
+                <div class="fgrp"><label>Escore total MBGR</label><input type="number" id="mbgrEscore" placeholder="Ex: 14" min="0"></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — MBGR</label><textarea id="mbgrObs" placeholder="Alterações encontradas, hipóteses, encaminhamentos..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 13: AMIOFE ══ -->
+            <div class="aba-conteudo" id="abaProtocolo13">
+              <div class="sec-title">😮 AMIOFE — Avaliação Miofuncional Orofacial com Escores</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia funções orofaciais, mastigação, postura e mobilidade facial.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Aparência geral</label><select id="amiofeAparencia"><option value="">Não avaliado</option><option>0 — Adequada</option><option>1 — Leve alteração</option><option>2 — Moderada alteração</option><option>3 — Grave alteração</option></select></div>
+                <div class="fgrp"><label>Postura de lábios</label><select id="amiofeLabios"><option value="">Não avaliado</option><option>0 — Adequada</option><option>1 — Leve</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>Postura de língua</label><select id="amiofeLingua"><option value="">Não avaliado</option><option>0 — Adequada</option><option>1 — Leve</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>Bochechas</label><select id="amiofeBochechas"><option value="">Não avaliado</option><option>0 — Adequada</option><option>1 — Leve</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>Mastigação</label><select id="amiofeMastigacao"><option value="">Não avaliado</option><option>0 — Normal</option><option>1 — Leve disfunção</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>Deglutição</label><select id="amiofeDeglutição"><option value="">Não avaliado</option><option>0 — Adequada</option><option>1 — Leve</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>Mobilidade</label><select id="amiofeMobilidade"><option value="">Não avaliado</option><option>0 — Adequada</option><option>1 — Leve</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>Escore total AMIOFE</label><input type="number" id="amiofeEscore" placeholder="Ex: 8" min="0"></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — AMIOFE</label><textarea id="amiofeObs" placeholder="Achados relevantes, prognóstico, metas terapêuticas..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 14: OMES ══ -->
+            <div class="aba-conteudo" id="abaProtocolo14">
+              <div class="sec-title">🦷 OMES — Orofacial Myofunctional Evaluation with Scores</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia estruturas orofaciais e funções miofuncionais.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Face / Cabeça</label><select id="omesFace"><option value="">Não avaliado</option><option>Normal</option><option>Alterada</option></select></div>
+                <div class="fgrp"><label>Lábios</label><select id="omesLabios"><option value="">Não avaliado</option><option>Normal</option><option>Hipotônico</option><option>Hipertônico</option><option>Assimétrico</option></select></div>
+                <div class="fgrp"><label>Língua</label><select id="omesLingua"><option value="">Não avaliado</option><option>Normal</option><option>Hipotônica</option><option>Hipertônica</option><option>Com frênulo alterado</option></select></div>
+                <div class="fgrp"><label>Palato duro</label><select id="omesPalato"><option value="">Não avaliado</option><option>Normal</option><option>Ogival</option><option>Plano</option><option>Fissura</option></select></div>
+                <div class="fgrp"><label>Oclusão dentária</label><select id="omesOclusao"><option value="">Não avaliado</option><option>Normal</option><option>Mordida aberta</option><option>Mordida cruzada</option><option>Classe II</option><option>Classe III</option></select></div>
+                <div class="fgrp"><label>Respiração</label><select id="omesRespiracao"><option value="">Não avaliado</option><option>Nasal</option><option>Mista</option><option>Oral</option></select></div>
+                <div class="fgrp"><label>Escore total OMES</label><input type="number" id="omesEscore" placeholder="Ex: 12" min="0"></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — OMES</label><textarea id="omesObs" placeholder="Achados estruturais e funcionais, encaminhamentos..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 15: CAPE-V ══ -->
+            <div class="aba-conteudo" id="abaProtocolo15">
+              <div class="sec-title">🎙️ CAPE-V — Consensus Auditory-Perceptual Evaluation of Voice</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia qualidade vocal, rouquidão, tensão vocal e soprosidade.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Grau geral de desvio (0–100)</label><input type="number" id="capevGrau" placeholder="Ex: 35" min="0" max="100"></div>
+                <div class="fgrp"><label>Severidade geral</label><select id="capevSev"><option value="">Não classificado</option><option>Normal</option><option>Leve</option><option>Moderado</option><option>Grave</option></select></div>
+                <div class="fgrp"><label>Rouquidão (Roughness)</label><input type="number" id="capevRouquidao" placeholder="0–100" min="0" max="100"></div>
+                <div class="fgrp"><label>Soprosidade (Breathiness)</label><input type="number" id="capevSoprosidade" placeholder="0–100" min="0" max="100"></div>
+                <div class="fgrp"><label>Tensão (Strain)</label><input type="number" id="capevTensao" placeholder="0–100" min="0" max="100"></div>
+                <div class="fgrp"><label>Instabilidade de pitch</label><select id="capevPitch"><option value="">Não avaliado</option><option>Ausente</option><option>Leve</option><option>Moderada</option><option>Grave</option></select></div>
+                <div class="fgrp"><label>Instabilidade de loudness</label><select id="capevLoudness"><option value="">Não avaliado</option><option>Ausente</option><option>Leve</option><option>Moderada</option><option>Grave</option></select></div>
+                <div class="fgrp"><label>Características adicionais</label><input type="text" id="capevAdic" placeholder="Ex: diplofonia, tremor..."></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — CAPE-V</label><textarea id="capevObs" placeholder="Descrição perceptivo-auditiva, hipótese, encaminhamentos..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 16: GRBAS ══ -->
+            <div class="aba-conteudo" id="abaProtocolo16">
+              <div class="sec-title">🔊 GRBAS — Avaliação Perceptiva da Voz</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia alterações vocais perceptivo-auditivas.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>G — Grau geral (Grade)</label><select id="grbasG"><option value="">Não avaliado</option><option>0 — Normal</option><option>1 — Leve</option><option>2 — Moderado</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>R — Rouquidão (Roughness)</label><select id="grbasR"><option value="">Não avaliado</option><option>0 — Ausente</option><option>1 — Leve</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>B — Soprosidade (Breathiness)</label><select id="grbasB"><option value="">Não avaliado</option><option>0 — Ausente</option><option>1 — Leve</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>A — Astenia</label><select id="grbasA"><option value="">Não avaliado</option><option>0 — Ausente</option><option>1 — Leve</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+                <div class="fgrp"><label>S — Tensão (Strain)</label><select id="grbasS"><option value="">Não avaliado</option><option>0 — Ausente</option><option>1 — Leve</option><option>2 — Moderada</option><option>3 — Grave</option></select></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — GRBAS</label><textarea id="grbasObs" placeholder="Perfil vocal, hipótese diagnóstica, encaminhamentos..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 17: SSI ══ -->
+            <div class="aba-conteudo" id="abaProtocolo17">
+              <div class="sec-title">💬 SSI-4 — Stuttering Severity Instrument</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia gagueira, fluência, bloqueios, repetições e esforço na fala.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Frequência de disfluências (%)</label><input type="number" id="ssiFreq" placeholder="Ex: 8" min="0" max="100"></div>
+                <div class="fgrp"><label>Duração média (seg)</label><input type="number" id="ssiDuracao" placeholder="Ex: 1.5" step="0.1" min="0"></div>
+                <div class="fgrp"><label>Escore de frequência</label><input type="number" id="ssiEscFreq" placeholder="0–18" min="0" max="18"></div>
+                <div class="fgrp"><label>Escore de duração</label><input type="number" id="ssiEscDur" placeholder="0–7" min="0" max="7"></div>
+                <div class="fgrp"><label>Tensão física / Comportamentos físicos</label><select id="ssiTensao"><option value="">Não avaliado</option><option>0 — Ausente</option><option>1 — Leve</option><option>2 — Moderado</option><option>3 — Moderado-grave</option><option>4 — Grave</option><option>5 — Muito grave</option></select></div>
+                <div class="fgrp"><label>Escore total SSI</label><input type="number" id="ssiTotal" placeholder="Ex: 22" min="0"></div>
+                <div class="fgrp"><label>Classificação de severidade</label><select id="ssiClassif"><option value="">Não classificado</option><option>Muito leve</option><option>Leve</option><option>Moderado</option><option>Grave</option><option>Muito grave</option></select></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — SSI</label><textarea id="ssiObs" placeholder="Tipos de disfluência, contextos, impacto comunicativo..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 18: PARD ══ -->
+            <div class="aba-conteudo" id="abaProtocolo18">
+              <div class="sec-title">🍽️ PARD — Protocolo de Avaliação do Risco para Disfagia</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia risco para disfagia e segurança da deglutição.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Presença de tosse durante deglutição</label><select id="pardTosse"><option value="">Não avaliado</option><option>Não</option><option>Ocasional</option><option>Frequente</option></select></div>
+                <div class="fgrp"><label>Voz molhada após deglutição</label><select id="pardVoz"><option value="">Não avaliado</option><option>Não</option><option>Sim</option></select></div>
+                <div class="fgrp"><label>Tempo de trânsito oral</label><select id="pardTransito"><option value="">Não avaliado</option><option>Normal</option><option>Aumentado</option><option>Muito aumentado</option></select></div>
+                <div class="fgrp"><label>Resíduo oral</label><select id="pardResiduo"><option value="">Não avaliado</option><option>Ausente</option><option>Leve</option><option>Moderado</option><option>Grave</option></select></div>
+                <div class="fgrp"><label>Consistência testada</label><select id="pardConsist"><option value="">Não testado</option><option>Líquido</option><option>Néctar</option><option>Mel</option><option>Pudim</option><option>Sólido</option><option>Todas</option></select></div>
+                <div class="fgrp"><label>Classificação de risco</label><select id="pardRisco"><option value="">Não classificado</option><option>Sem risco</option><option>Risco leve</option><option>Risco moderado</option><option>Alto risco</option></select></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — PARD</label><textarea id="pardObs" placeholder="Sinais clínicos, consistências seguras, recomendações..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 19: EAT-10 ══ -->
+            <div class="aba-conteudo" id="abaProtocolo19">
+              <div class="sec-title">😮‍💨 EAT-10 — Eating Assessment Tool</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia dificuldade para engolir e sintomas de disfagia (0–4 por item, total 0–40).</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Item 1 — Engolir é difícil</label><select id="eat1"><option value="">Não respondido</option><option value="0">0 — Nenhum problema</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4 — Problema grave</option></select></div>
+                <div class="fgrp"><label>Item 2 — Deglutição dolorosa</label><select id="eat2"><option value="">Não respondido</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                <div class="fgrp"><label>Item 3 — Dificuldade engolir líquidos</label><select id="eat3"><option value="">Não respondido</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                <div class="fgrp"><label>Item 4 — Dificuldade engolir sólidos</label><select id="eat4"><option value="">Não respondido</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                <div class="fgrp"><label>Item 5 — Dificuldade engolir pastosos</label><select id="eat5"><option value="">Não respondido</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                <div class="fgrp"><label>Item 6 — Dificuldade engolir comprimidos</label><select id="eat6"><option value="">Não respondido</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                <div class="fgrp"><label>Item 7 — Engolir é estressante</label><select id="eat7"><option value="">Não respondido</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                <div class="fgrp"><label>Item 8 — Prazer ao comer diminuído</label><select id="eat8"><option value="">Não respondido</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                <div class="fgrp"><label>Item 9 — Tosse ao engolir</label><select id="eat9"><option value="">Não respondido</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                <div class="fgrp"><label>Item 10 — Cansativo engolir</label><select id="eat10"><option value="">Não respondido</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div>
+                <div class="fgrp"><label>Escore total EAT-10</label><input type="number" id="eatTotal" placeholder="0–40" min="0" max="40"></div>
+                <div class="fgrp"><label>Resultado</label><select id="eatResultado"><option value="">Não classificado</option><option>Normal (0–2)</option><option>Risco de disfagia (≥3)</option></select></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — EAT-10</label><textarea id="eatObs" placeholder="Contexto, estratégias, encaminhamentos..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 20: FOIS ══ -->
+            <div class="aba-conteudo" id="abaProtocolo20">
+              <div class="sec-title">🥄 FOIS — Functional Oral Intake Scale</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia nível funcional de alimentação via oral.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Nível FOIS</label><select id="foisNivel"><option value="">Não avaliado</option><option value="1">1 — Nada via oral</option><option value="2">2 — Via oral mínima, nutrição/hidratação alternativa</option><option value="3">3 — Via oral complementar com alternativa</option><option value="4">4 — Via oral apenas com restrições específicas</option><option value="5">5 — Via oral, múltiplas consistências, com estratégias</option><option value="6">6 — Via oral completa, sem restrições específicas</option><option value="7">7 — Via oral, sem restrições</option></select></div>
+                <div class="fgrp"><label>Avaliação — data</label><input type="date" id="foisData"></div>
+                <div class="fgrp"><label>Reavaliação — nível</label><select id="foisReavNivel"><option value="">Não reavaliado</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select></div>
+                <div class="fgrp"><label>Reavaliação — data</label><input type="date" id="foisReavData"></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — FOIS</label><textarea id="foisObs" placeholder="Evolução funcional, estratégias utilizadas, prognóstico..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 21: Audiometria Tonal ══ -->
+            <div class="aba-conteudo" id="abaProtocolo21">
+              <div class="sec-title">👂 Audiometria Tonal — Avaliação da Capacidade Auditiva</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia perda auditiva e capacidade auditiva por frequência.</p>
+              <div class="fg fg-3">
+                <div class="fgrp"><label>OD — 500 Hz (dB)</label><input type="number" id="audOD500" placeholder="Ex: 25" step="5"></div>
+                <div class="fgrp"><label>OD — 1000 Hz (dB)</label><input type="number" id="audOD1000" placeholder="Ex: 20" step="5"></div>
+                <div class="fgrp"><label>OD — 2000 Hz (dB)</label><input type="number" id="audOD2000" placeholder="Ex: 30" step="5"></div>
+                <div class="fgrp"><label>OD — 4000 Hz (dB)</label><input type="number" id="audOD4000" placeholder="Ex: 40" step="5"></div>
+                <div class="fgrp"><label>OE — 500 Hz (dB)</label><input type="number" id="audOE500" placeholder="Ex: 25" step="5"></div>
+                <div class="fgrp"><label>OE — 1000 Hz (dB)</label><input type="number" id="audOE1000" placeholder="Ex: 20" step="5"></div>
+                <div class="fgrp"><label>OE — 2000 Hz (dB)</label><input type="number" id="audOE2000" placeholder="Ex: 30" step="5"></div>
+                <div class="fgrp"><label>OE — 4000 Hz (dB)</label><input type="number" id="audOE4000" placeholder="Ex: 40" step="5"></div>
+                <div class="fgrp"><label>Classificação OD</label><select id="audClassifOD"><option value="">Não classificado</option><option>Audição normal</option><option>Perda leve</option><option>Perda moderada</option><option>Perda moderada-severa</option><option>Perda severa</option><option>Perda profunda</option></select></div>
+                <div class="fgrp"><label>Classificação OE</label><select id="audClassifOE"><option value="">Não classificado</option><option>Audição normal</option><option>Perda leve</option><option>Perda moderada</option><option>Perda moderada-severa</option><option>Perda severa</option><option>Perda profunda</option></select></div>
+                <div class="fgrp"><label>Tipo de perda OD</label><select id="audTipoOD"><option value="">Não classificado</option><option>Condutiva</option><option>Neurossensorial</option><option>Mista</option></select></div>
+                <div class="fgrp"><label>Tipo de perda OE</label><select id="audTipoOE"><option value="">Não classificado</option><option>Condutiva</option><option>Neurossensorial</option><option>Mista</option></select></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — Audiometria</label><textarea id="audObs" placeholder="Configuração do audiograma, encaminhamentos, aparelho auditivo..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 22: Imitanciometria ══ -->
+            <div class="aba-conteudo" id="abaProtocolo22">
+              <div class="sec-title">📡 Imitanciometria — Avaliação da Orelha Média</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia função da orelha média e reflexos acústicos.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Timpanograma OD — Tipo</label><select id="impTipoOD"><option value="">Não avaliado</option><option>Tipo A (normal)</option><option>Tipo As (rigidez)</option><option>Tipo Ad (hipercomplacência)</option><option>Tipo B (plana)</option><option>Tipo C (pressão negativa)</option></select></div>
+                <div class="fgrp"><label>Timpanograma OE — Tipo</label><select id="impTipoOE"><option value="">Não avaliado</option><option>Tipo A (normal)</option><option>Tipo As (rigidez)</option><option>Tipo Ad (hipercomplacência)</option><option>Tipo B (plana)</option><option>Tipo C (pressão negativa)</option></select></div>
+                <div class="fgrp"><label>Pico OD (daPa)</label><input type="number" id="impPicoOD" placeholder="Ex: -50"></div>
+                <div class="fgrp"><label>Pico OE (daPa)</label><input type="number" id="impPicoOE" placeholder="Ex: -30"></div>
+                <div class="fgrp"><label>Reflexo acústico OD</label><select id="impReflexoOD"><option value="">Não avaliado</option><option>Presente bilateral</option><option>Ausente ipsilateral</option><option>Ausente contralateral</option><option>Ausente bilateral</option></select></div>
+                <div class="fgrp"><label>Reflexo acústico OE</label><select id="impReflexoOE"><option value="">Não avaliado</option><option>Presente bilateral</option><option>Ausente ipsilateral</option><option>Ausente contralateral</option><option>Ausente bilateral</option></select></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — Imitanciometria</label><textarea id="impObs" placeholder="Interpretação, hipótese de otite, encaminhamentos..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 23: BERA/PEATE ══ -->
+            <div class="aba-conteudo" id="abaProtocolo23">
+              <div class="sec-title">🧠 BERA / PEATE — Potencial Evocado Auditivo do Tronco Encefálico</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia resposta auditiva do tronco encefálico.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Limiar eletrofisiológico OD (dBnHL)</label><input type="number" id="beraLimiarOD" placeholder="Ex: 30" step="5"></div>
+                <div class="fgrp"><label>Limiar eletrofisiológico OE (dBnHL)</label><input type="number" id="beraLimiarOE" placeholder="Ex: 25" step="5"></div>
+                <div class="fgrp"><label>Onda I — Latência OD (ms)</label><input type="number" id="beraI_OD" placeholder="Ex: 1.78" step="0.01"></div>
+                <div class="fgrp"><label>Onda I — Latência OE (ms)</label><input type="number" id="beraI_OE" placeholder="Ex: 1.82" step="0.01"></div>
+                <div class="fgrp"><label>Onda III — Latência OD (ms)</label><input type="number" id="beraIII_OD" placeholder="Ex: 3.88" step="0.01"></div>
+                <div class="fgrp"><label>Onda III — Latência OE (ms)</label><input type="number" id="beraIII_OE" placeholder="Ex: 3.90" step="0.01"></div>
+                <div class="fgrp"><label>Onda V — Latência OD (ms)</label><input type="number" id="beraV_OD" placeholder="Ex: 5.72" step="0.01"></div>
+                <div class="fgrp"><label>Onda V — Latência OE (ms)</label><input type="number" id="beraV_OE" placeholder="Ex: 5.68" step="0.01"></div>
+                <div class="fgrp"><label>Resultado OD</label><select id="beraResOD"><option value="">Não avaliado</option><option>Normal</option><option>Alterado — perda leve</option><option>Alterado — perda moderada</option><option>Alterado — perda severa</option><option>Alterado — perda profunda</option><option>Ausência de resposta</option></select></div>
+                <div class="fgrp"><label>Resultado OE</label><select id="beraResOE"><option value="">Não avaliado</option><option>Normal</option><option>Alterado — perda leve</option><option>Alterado — perda moderada</option><option>Alterado — perda severa</option><option>Alterado — perda profunda</option><option>Ausência de resposta</option></select></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — BERA/PEATE</label><textarea id="beraObs" placeholder="Interpretação das ondas, morfologia, encaminhamentos..."></textarea></div>
+            </div>
+
+            <!-- ══ ABA 24: PAC ══ -->
+            <div class="aba-conteudo" id="abaProtocolo24">
+              <div class="sec-title">🔉 PAC — Processamento Auditivo Central</div>
+              <p style="font-size:12.5px;color:var(--txt3);margin-bottom:14px;">Avalia processamento auditivo central e interpretação sonora.</p>
+              <div class="fg fg-2">
+                <div class="fgrp"><label>Figura-fundo OD (%)</label><input type="number" id="pacFFOD" placeholder="Ex: 72" min="0" max="100"></div>
+                <div class="fgrp"><label>Figura-fundo OE (%)</label><input type="number" id="pacFFOE" placeholder="Ex: 68" min="0" max="100"></div>
+                <div class="fgrp"><label>Dicótico de dígitos OD (%)</label><input type="number" id="pacDicOD" placeholder="Ex: 85" min="0" max="100"></div>
+                <div class="fgrp"><label>Dicótico de dígitos OE (%)</label><input type="number" id="pacDicOE" placeholder="Ex: 78" min="0" max="100"></div>
+                <div class="fgrp"><label>Padrão de frequência (%)</label><input type="number" id="pacFreq" placeholder="Ex: 60" min="0" max="100"></div>
+                <div class="fgrp"><label>Padrão de duração (%)</label><input type="number" id="pacDur" placeholder="Ex: 65" min="0" max="100"></div>
+                <div class="fgrp"><label>Habilidade mais comprometida</label><select id="pacHabilidade"><option value="">Não avaliado</option><option>Figura-fundo</option><option>Fechamento auditivo</option><option>Atenção seletiva</option><option>Discriminação</option><option>Ordenação temporal</option><option>Resolução temporal</option></select></div>
+                <div class="fgrp"><label>Resultado geral</label><select id="pacResultado"><option value="">Não classificado</option><option>Normal</option><option>Desordem do PAC leve</option><option>Desordem do PAC moderada</option><option>Desordem do PAC grave</option></select></div>
+              </div>
+              <div class="fgrp"><label>Observações clínicas — PAC</label><textarea id="pacObs" placeholder="Perfil auditivo central, habilidades alteradas, recomendações terapêuticas..."></textarea></div>
             </div>
 
             <!-- ABA 10 — EVOLUÇÃO (fora do submit, gerenciada separadamente) -->
@@ -1589,22 +1861,38 @@ function setCloud(estado) {
 
 // expor funções usadas em onclick inline
 window.mudarAba = function(i) {
-  // aba 8 = Evolução — não faz parte do form, tratada à parte
   const abaEvol = document.getElementById('abaEvolucao');
   const formActions = document.querySelector('.form-actions');
-  if (i === 8) {
-    document.querySelectorAll('.aba-conteudo').forEach(el => el.classList.remove('ativa'));
-    document.querySelectorAll('.aba-btn').forEach((b,j) => b.classList.toggle('ativa', j===8));
+
+  // Esconde tudo
+  document.querySelectorAll('.aba-conteudo').forEach(el => {
+    el.classList.remove('ativa');
+    if (el.id && el.id.startsWith('abaProtocolo')) el.style.display = 'none';
+  });
+  abaEvol.style.display = 'none';
+  abaEvol.classList.remove('ativa');
+
+  // Desmarca todos os botões
+  document.querySelectorAll('.aba-btn').forEach(b => b.classList.remove('ativa'));
+  const btnAtivo = document.getElementById('ab' + i);
+  if (btnAtivo) btnAtivo.classList.add('ativa');
+
+  if (i === 9) {
+    // Aba de evolução
     abaEvol.style.display = 'block';
     abaEvol.classList.add('ativa');
     if (formActions) formActions.style.display = 'none';
     renderEvolucao();
-  } else {
-    abaEvol.style.display = 'none';
-    abaEvol.classList.remove('ativa');
+  } else if (i >= 10 && i <= 24) {
+    // Protocolos com ID próprio
+    const proto = document.getElementById('abaProtocolo' + i);
+    if (proto) { proto.style.display = 'block'; proto.classList.add('ativa'); }
     if (formActions) formActions.style.display = 'flex';
-    document.querySelectorAll('.aba-conteudo').forEach((el,j) => el.classList.toggle('ativa', j===i));
-    document.querySelectorAll('.aba-btn').forEach((b,j) => b.classList.toggle('ativa', j===i));
+  } else {
+    // Abas 0-8 por índice posicional (excluindo as de protocolo e evolução do seletor)
+    if (formActions) formActions.style.display = 'flex';
+    const abasNormais = document.querySelectorAll('.aba-conteudo:not([id^="abaProtocolo"]):not(#abaEvolucao)');
+    abasNormais.forEach((el, j) => el.classList.toggle('ativa', j === i));
   }
 };
 window.trocarAbaAuth = function(modo) {
