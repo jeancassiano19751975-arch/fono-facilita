@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fono Facilita v36 — Fonoaudiologia</title>
+<title>Fono Facilita v37 — Fonoaudiologia</title>
 <!-- preconnect acelera DNS/TLS antecipadamente -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -777,7 +777,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <p class="bv-sub" id="bvSub">Sistema Fonoaudiológico · Anamnese</p>
     <div class="bv-badge">
       <div class="bv-badge-dot"></div>
-      v36.0 · Sistema Online
+      v37.0 · Sistema Online
     </div>
     <div class="bv-hint"><div class="bv-hint-dot"></div>Clique para entrar</div>
   </div>
@@ -864,7 +864,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div style="text-align:center;margin-top:18px;">
       <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--txt3);background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:4px 12px;">
         <span style="width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(52,211,153,.6);display:inline-block;"></span>
-        v36.0 · Fono Facilita
+        v37.0 · Fono Facilita
       </span>
     </div>
   </div>
@@ -2383,7 +2383,7 @@ function fmtDH(iso) {
   try {
     const d = iso.toDate ? iso.toDate() : new Date(iso);
     if (!d || isNaN(d.getTime())) return '—';
-    return d.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'}) + ' ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'});
+    return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
   } catch(e) { return '—'; }
 }
 function fmtD(iso) {
@@ -2391,7 +2391,7 @@ function fmtD(iso) {
   try {
     const d = iso.toDate ? iso.toDate() : new Date(iso);
     if (!d || isNaN(d.getTime())) return '—';
-    return d.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'});
+    return d.toLocaleDateString('pt-BR');
   } catch(e) { return '—'; }
 }
 function setCloud(estado) {
