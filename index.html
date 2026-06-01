@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fono Facilita v25 — Fonoaudiologia</title>
+<title>Fono Facilita v27 — Fonoaudiologia</title>
 <!-- preconnect acelera DNS/TLS antecipadamente -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -942,7 +942,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <p class="bv-sub" id="bvSub">Sistema Fonoaudiológico · Anamnese</p>
     <div class="bv-badge">
       <div class="bv-badge-dot"></div>
-      v25.0 · Sistema Online
+      v27.0 · Sistema Online
     </div>
     <div class="bv-hint"><div class="bv-hint-dot"></div>Clique para entrar</div>
   </div>
@@ -1031,7 +1031,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div style="text-align:center;margin-top:18px;">
       <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--txt3);background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:4px 12px;">
         <span style="width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(52,211,153,.6);display:inline-block;"></span>
-        v25.0 · Fono Facilita
+        v27.0 · Fono Facilita
       </span>
     </div>
   </div>
@@ -2641,13 +2641,19 @@ function openModal(id)  { $(id).classList.add('on'); }
 function closeModal(id) { $(id).classList.remove('on'); }
 function fmtDH(iso) {
   if (!iso) return '—';
-  const d = iso.toDate ? iso.toDate() : new Date(iso);
-  return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  try {
+    const d = iso.toDate ? iso.toDate() : new Date(iso);
+    if (isNaN(d)) return '—';
+    return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  } catch(e) { return '—'; }
 }
 function fmtD(iso) {
   if (!iso) return '—';
-  const d = iso.toDate ? iso.toDate() : new Date(iso);
-  return d.toLocaleDateString('pt-BR');
+  try {
+    const d = iso.toDate ? iso.toDate() : new Date(iso);
+    if (isNaN(d)) return '—';
+    return d.toLocaleDateString('pt-BR');
+  } catch(e) { return '—'; }
 }
 function setCloud(estado) {
   const b = $('cloudBadge');
@@ -2658,6 +2664,14 @@ function setCloud(estado) {
 }
 
 // expor funções usadas em onclick inline
+window.abrirRelatorio  = function() { abrirRelatorio(); };
+window.abrirDashboard  = function() { abrirDashboard(); };
+window.abrirAgenda     = function() { abrirAgenda(); };
+window.abrirSupervisao = function() { abrirSupervisao(); };
+window.fecharRelatorio  = function() { fecharRelatorio(); };
+window.fecharDashboard  = function() { fecharDashboard(); };
+window.fecharSupervisao = function() { fecharSupervisao(); };
+window.enviarSupervisao = function() { enviarSupervisao(); };
 window.mudarAba = function(i) {
   const abaEvol = document.getElementById('abaEvolucao');
   const formActions = document.querySelector('.form-actions');
@@ -2871,20 +2885,25 @@ async function salvarPacienteFirestore(dados) {
   setCloud('saving');
   try {
     const uid = auth.currentUser.uid;
-    // R08 — garante que o uid sempre corresponde ao usuário logado
     dados.uid = uid;
+    const agora = new Date().toISOString();
     if (dados.firestoreId) {
       const id = dados.firestoreId;
       delete dados.firestoreId;
       dados.dataEdicao = serverTimestamp();
-      // R08 — usa merge:false e inclui uid para que as Firestore Rules possam validar
+      dados.dataEdicaoISO = agora;
       await setDoc(doc(db, 'pacientes', id), dados);
       dados.firestoreId = id;
+      dados.dataEdicao = { toDate: () => new Date(agora) };
     } else {
       dados.dataCriacao = serverTimestamp();
       dados.dataEdicao  = serverTimestamp();
+      dados.dataCriacaoISO = agora;
+      dados.dataEdicaoISO  = agora;
       const ref = await addDoc(collection(db, 'pacientes'), dados);
       dados.firestoreId = ref.id;
+      dados.dataCriacao = { toDate: () => new Date(agora) };
+      dados.dataEdicao  = { toDate: () => new Date(agora) };
     }
     setCloud('ok');
     return dados;
@@ -3847,19 +3866,13 @@ async function _gerarPDFInterno(p, modo) {
 async function gerarPDF(p) {
   if (!p) return;
   toast('⏳ Preparando PDF...');
-  // Mescla dados salvos com o estado atual do formulário (se estiver editando)
-  const editId = $('formAnamnese').getAttribute('data-edit-id');
-  const dadosAtuais = editId ? { ...p, ...capForm(), evolucao: evolucaoCache } : p;
-  const ok = await _gerarPDFInterno(dadosAtuais, 'download');
+  const ok = await _gerarPDFInterno(p, 'download');
   if (ok === null) { toast('❌ Erro ao carregar gerador de PDF.', true); return; }
   toast('🖨️ PDF gerado com sucesso!');
 }
 
 async function gerarPDFBase64(p) {
-  // Mescla dados salvos com estado atual do formulário se estiver editando
-  const editId = $('formAnamnese').getAttribute('data-edit-id');
-  const dadosAtuais = editId ? { ...p, ...capForm(), evolucao: evolucaoCache } : p;
-  return await _gerarPDFInterno(dadosAtuais, 'base64');
+  return await _gerarPDFInterno(p, 'base64');
 }
 
 async function carregarJsPDF() {
