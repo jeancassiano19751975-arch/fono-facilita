@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fono Facilita v34 — Fonoaudiologia</title>
+<title>Fono Facilita v36 — Fonoaudiologia</title>
 <!-- preconnect acelera DNS/TLS antecipadamente -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -777,7 +777,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <p class="bv-sub" id="bvSub">Sistema Fonoaudiológico · Anamnese</p>
     <div class="bv-badge">
       <div class="bv-badge-dot"></div>
-      v34.0 · Sistema Online
+      v36.0 · Sistema Online
     </div>
     <div class="bv-hint"><div class="bv-hint-dot"></div>Clique para entrar</div>
   </div>
@@ -864,7 +864,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div style="text-align:center;margin-top:18px;">
       <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--txt3);background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:4px 12px;">
         <span style="width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(52,211,153,.6);display:inline-block;"></span>
-        v34.0 · Fono Facilita
+        v36.0 · Fono Facilita
       </span>
     </div>
   </div>
@@ -911,8 +911,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
         </p>
       </div>
       <button class="btn-novo" id="btnNovo">+ Criar Novo Paciente</button>
-      <button class="btn-relatorio" id="btnRelatorio">📊 Relatório</button>
-      <button class="btn-relatorio" id="btnSupervisor" style="border-color:rgba(167,139,250,.3);color:var(--purple);">👑 Supervisor</button>
+      <button class="btn-relatorio" id="btnRelatorio" onclick="window.abrirRelatorio()">📊 Relatório</button>
+      <button class="btn-relatorio" id="btnSupervisor" style="border-color:rgba(167,139,250,.3);color:var(--purple);" onclick="window.abrirDashboard()">👑 Supervisor</button>
     </div>
 
     <div class="content-scroll">
@@ -2056,7 +2056,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <button class="mbtn-wpp" id="btnMWhatsApp">💬 Enviar por WhatsApp</button>
       <button class="mbtn-email" id="btnMEmail">📧 Enviar PDF por E-mail</button>
       <button class="mbtn-exp" id="btnMExportar">📤 Exportar Dados (.json)</button>
-      <button class="mbtn-exp" id="btnMGrafico" style="background:linear-gradient(135deg,var(--acc2),var(--acc3));color:#fff;">📈 Ver Evolução</button>
+      <button class="mbtn-exp" id="btnMGrafico" style="background:linear-gradient(135deg,var(--acc2),var(--acc3));color:#fff;" onclick="const p=window.pacSel;closeModal('overlayOpcoes');setTimeout(()=>window.abrirGraficoEvolucao(p),150)">📈 Ver Evolução</button>
       <button class="mbtn-close" id="btnMFechar">Fechar</button>
     </div>
   </div>
@@ -2383,7 +2383,7 @@ function fmtDH(iso) {
   try {
     const d = iso.toDate ? iso.toDate() : new Date(iso);
     if (!d || isNaN(d.getTime())) return '—';
-    return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    return d.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'}) + ' ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',timeZone:'America/Sao_Paulo'});
   } catch(e) { return '—'; }
 }
 function fmtD(iso) {
@@ -2391,7 +2391,7 @@ function fmtD(iso) {
   try {
     const d = iso.toDate ? iso.toDate() : new Date(iso);
     if (!d || isNaN(d.getTime())) return '—';
-    return d.toLocaleDateString('pt-BR');
+    return d.toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'});
   } catch(e) { return '—'; }
 }
 function setCloud(estado) {
@@ -3539,11 +3539,11 @@ async function _gerarPDFInterno(p, modo) {
 }
 
 window.gerarPDF = async function(p) {
-  if (!p) return;
-  toast('⏳ Preparando PDF...');
+  if (!p) { toast('❌ Nenhum paciente selecionado.', true); return; }
+  toast('⏳ Preparando PDF... (nome: ' + (p.nome||'VAZIO') + ')');
   const ok = await _gerarPDFInterno(p, 'download');
   if (ok === null) { toast('❌ Erro ao carregar gerador de PDF.', true); return; }
-  toast('🖨️ PDF gerado com sucesso!');
+  toast('🖨️ PDF gerado!');
 };
 
 async function gerarPDFBase64(p) {
