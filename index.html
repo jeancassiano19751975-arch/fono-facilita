@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fono Facilita v27 — Fonoaudiologia</title>
+<title>Fono Facilita v33 — Fonoaudiologia</title>
 <!-- preconnect acelera DNS/TLS antecipadamente -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,238 +40,73 @@ input::placeholder,textarea::placeholder{color:var(--txt3);}
 select option{background:var(--bg2);}
 textarea{resize:vertical;min-height:78px;line-height:1.55;}
 
-/* ── R27 — NOTIFICAÇÕES fichas sem atualização ── */
-.notif-banner{
-  background:rgba(251,191,36,.07);border:1.5px solid rgba(251,191,36,.25);
-  border-radius:var(--radius);padding:12px 16px;margin-bottom:14px;
-  display:none;gap:10px;align-items:flex-start;
-}
-.notif-banner.visible{display:flex;}
-.notif-banner-icon{font-size:20px;flex-shrink:0;}
-.notif-banner-body{flex:1;}
-.notif-banner-title{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;}
-.notif-banner-list{list-style:none;display:flex;flex-direction:column;gap:3px;}
-.notif-banner-list li{font-size:12px;color:var(--txt2);}
-.notif-banner-list li span{color:var(--amber);font-weight:600;}
-.notif-close{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;padding:0 4px;flex-shrink:0;}
-.notif-close:hover{color:var(--txt1);}
-
-/* ── R26 — MODAL RELATÓRIO ESTATÍSTICO ── */
-.relatorio-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;
-  display:none;align-items:center;justify-content:center;padding:20px;
-}
-.relatorio-overlay.open{display:flex;}
-.relatorio-modal{
-  background:var(--bg1);border:1.5px solid var(--border2);border-radius:16px;
-  width:100%;max-width:680px;max-height:88vh;overflow:hidden;
-  display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.6);
-}
-.relatorio-head{
-  padding:20px 24px;border-bottom:1.5px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.relatorio-head h2{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;}
-.relatorio-body{padding:20px 24px;overflow-y:auto;flex:1;}
-.rel-section{margin-bottom:22px;}
-.rel-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:10px;}
-.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;}
-.rel-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
-.rel-card-val{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--txt1);}
-.rel-card-lbl{font-size:11px;color:var(--txt3);margin-top:2px;}
-.rel-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
-.rel-bar-label{font-size:12px;color:var(--txt2);width:130px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.rel-bar-track{flex:1;height:8px;background:var(--bg3);border-radius:99px;overflow:hidden;}
-.rel-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--acc2),var(--acc));transition:width .4s;}
-.rel-bar-count{font-size:11px;color:var(--txt3);width:28px;text-align:right;flex-shrink:0;}
-.relatorio-foot{padding:16px 24px;border-top:1.5px solid var(--border);display:flex;gap:10px;justify-content:flex-end;}
-.btn-rel-export{
-  padding:9px 18px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;border:none;
-  background:linear-gradient(135deg,var(--acc2),var(--acc3));color:#fff;
-  transition:.2s;
-}
-.btn-rel-export:hover{opacity:.88;}
-.btn-rel-close{
-  padding:9px 18px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;
-  background:var(--bg3);border:1.5px solid var(--border2);color:var(--txt2);transition:.2s;
-}
-.btn-rel-close:hover{color:var(--txt1);}
-
-/* ── R22 — GRÁFICO DE EVOLUÇÃO ── */
-.evolucao-chart-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;
-  display:none;align-items:center;justify-content:center;padding:20px;
-}
-.evolucao-chart-overlay.open{display:flex;}
-.evolucao-chart-modal{
-  background:var(--bg1);border:1.5px solid var(--border2);border-radius:16px;
-  width:100%;max-width:700px;box-shadow:0 24px 64px rgba(0,0,0,.6);overflow:hidden;
-}
-.evolucao-chart-head{
-  padding:18px 24px;border-bottom:1.5px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.evolucao-chart-head h2{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;}
-.evolucao-chart-body{padding:20px 24px 24px;}
-.evolucao-chart-wrap{position:relative;width:100%;height:260px;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
-.evolucao-chart-canvas{display:block;width:100%;height:100%;}
-.evolucao-chart-empty{display:flex;align-items:center;justify-content:center;height:100%;color:var(--txt3);font-size:13px;}
-.evolucao-chart-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
-.evolucao-chart-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--txt2);}
-.evolucao-chart-legend-dot{width:10px;height:10px;border-radius:50%;}
-.evolucao-chart-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.evolucao-chart-tab{
-  padding:5px 12px;border-radius:99px;font-size:11.5px;font-weight:600;cursor:pointer;
-  background:var(--bg3);border:1.5px solid var(--border2);color:var(--txt3);transition:.15s;
-}
-.evolucao-chart-tab.ativa{background:rgba(79,110,247,.15);border-color:var(--acc2);color:var(--acc);}
-
-/* ── R25 — DASHBOARD DO SUPERVISOR ── */
-.dashboard-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;
-  display:none;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;
-}
-.dashboard-overlay.open{display:flex;}
-.dashboard-modal{
-  background:var(--bg1);border:1.5px solid var(--border2);border-radius:16px;
-  width:100%;max-width:780px;margin:auto;
-  box-shadow:0 24px 64px rgba(0,0,0,.6);overflow:hidden;
-}
-.dashboard-head{
-  padding:20px 24px;border-bottom:1.5px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  background:linear-gradient(135deg,rgba(79,110,247,.08),rgba(167,139,250,.06));
-}
-.dashboard-head h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;}
-.dashboard-body{padding:20px 24px 28px;}
-.dash-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px;}
-.dash-kpi{
-  background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;
-  padding:14px 12px;text-align:center;position:relative;overflow:hidden;
-}
-.dash-kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--bar,linear-gradient(90deg,var(--acc2),var(--acc)));}
-.dash-kpi:nth-child(2){--bar:linear-gradient(90deg,var(--green2),var(--green));}
-.dash-kpi:nth-child(3){--bar:linear-gradient(90deg,var(--pink2),var(--pink));}
-.dash-kpi:nth-child(4){--bar:linear-gradient(90deg,#d97706,var(--amber));}
-.dash-kpi-val{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;}
-.dash-kpi-lbl{font-size:10.5px;color:var(--txt3);margin-top:2px;}
-.dash-section{margin-bottom:20px;}
-.dash-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
-.dash-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
-.dash-bar-label{font-size:12px;color:var(--txt2);width:120px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.dash-bar-track{flex:1;height:10px;background:var(--bg3);border-radius:99px;overflow:hidden;}
-.dash-bar-fill{height:100%;border-radius:99px;transition:width .5s;}
-.dash-bar-fill.blue{background:linear-gradient(90deg,var(--acc2),var(--acc));}
-.dash-bar-fill.green{background:linear-gradient(90deg,var(--green2),var(--green));}
-.dash-bar-fill.pink{background:linear-gradient(90deg,var(--pink2),var(--pink));}
-.dash-bar-fill.amber{background:linear-gradient(90deg,#d97706,var(--amber));}
-.dash-bar-count{font-size:11px;color:var(--txt3);width:28px;text-align:right;flex-shrink:0;}
-.dash-table{width:100%;border-collapse:collapse;font-size:12.5px;}
-.dash-table th{text-align:left;padding:8px 10px;color:var(--txt3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-bottom:1.5px solid var(--border);}
-.dash-table td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--txt2);}
-.dash-table td:first-child{color:var(--txt1);font-weight:600;}
-.dash-table tr:last-child td{border-bottom:none;}
-.dash-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-@media(max-width:600px){.dash-kpi-row{grid-template-columns:repeat(2,1fr);}.dash-grid-2{grid-template-columns:1fr;}}
-
-/* ── R24 — BOTÃO ENVIAR PARA SUPERVISÃO ── */
-.btn-supervisao{
-  padding:9px 16px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;
-  background:rgba(167,139,250,.12);border:1.5px solid rgba(167,139,250,.3);color:var(--purple);
-  transition:.2s;display:flex;align-items:center;gap:6px;
-}
-.btn-supervisao:hover{background:rgba(167,139,250,.2);border-color:var(--purple);}
-.supervisao-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;
-  display:none;align-items:center;justify-content:center;padding:20px;
-}
-.supervisao-overlay.open{display:flex;}
-.supervisao-modal{
-  background:var(--bg1);border:1.5px solid var(--border2);border-radius:16px;
-  width:100%;max-width:540px;box-shadow:0 24px 64px rgba(0,0,0,.6);overflow:hidden;
-}
-.supervisao-head{padding:20px 24px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.supervisao-head h2{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--purple);}
-.supervisao-body{padding:20px 24px;}
-.supervisao-body .fgrp{margin-bottom:14px;}
-.supervisao-body label{font-size:12px;color:var(--txt3);font-weight:600;display:block;margin-bottom:5px;}
-.supervisao-resumo{
-  background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;
-  padding:12px 14px;margin-bottom:16px;font-size:12.5px;color:var(--txt2);line-height:1.7;
-}
-.supervisao-resumo strong{color:var(--txt1);}
-.supervisao-foot{padding:16px 24px;border-top:1.5px solid var(--border);display:flex;gap:10px;justify-content:flex-end;}
-.btn-supv-send{
-  padding:9px 18px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;border:none;
-  background:linear-gradient(135deg,var(--purple),#6d28d9);color:#fff;transition:.2s;
-}
-.btn-supv-send:hover{opacity:.88;}
-
-/* ── R21 — AGENDA ── */
-#viewAgenda{display:none;animation:fadeUp .28s ease both;}
-.agenda-wrap{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start;}
-@media(max-width:900px){.agenda-wrap{grid-template-columns:1fr;}}
-.agenda-cal{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;}
-.agenda-cal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1.5px solid var(--border);}
-.agenda-cal-head h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;}
-.agenda-cal-nav{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:18px;padding:4px 8px;border-radius:6px;transition:.15s;}
-.agenda-cal-nav:hover{background:var(--bg3);color:var(--txt1);}
-.agenda-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);}
-.agenda-cal-dow{background:var(--bg1);padding:8px 4px;text-align:center;font-size:10.5px;font-weight:700;color:var(--txt3);text-transform:uppercase;}
-.agenda-cal-day{
-  background:var(--bg2);padding:8px 6px;min-height:64px;cursor:pointer;
-  transition:background .15s;position:relative;
-}
-.agenda-cal-day:hover{background:var(--bg3);}
-.agenda-cal-day.outro-mes{opacity:.35;}
-.agenda-cal-day.hoje{background:rgba(79,110,247,.08);}
-.agenda-cal-day.hoje .agenda-day-num{color:var(--acc);font-weight:800;}
-.agenda-cal-day.selecionado{background:rgba(79,110,247,.15);border:1px solid rgba(79,110,247,.3);}
-.agenda-day-num{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:4px;}
-.agenda-day-evento{
-  font-size:10px;font-weight:600;padding:2px 5px;border-radius:4px;
-  background:rgba(79,110,247,.2);color:var(--acc);margin-bottom:2px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.agenda-day-evento.concluido{background:rgba(52,211,153,.15);color:var(--green);}
-.agenda-side{display:flex;flex-direction:column;gap:14px;}
-.agenda-form{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:18px;}
-.agenda-form h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;margin-bottom:14px;color:var(--txt1);}
-.agenda-form .fgrp{margin-bottom:10px;}
-.agenda-form label{font-size:11.5px;color:var(--txt3);font-weight:600;display:block;margin-bottom:4px;}
-.btn-agendar{
-  width:100%;padding:10px;border-radius:var(--radius);font-size:13px;font-weight:700;cursor:pointer;border:none;
-  background:linear-gradient(135deg,var(--acc2),var(--acc3));color:#fff;transition:.2s;margin-top:6px;
-}
-.btn-agendar:hover{opacity:.88;}
-.agenda-lista{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:18px;}
-.agenda-lista h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;margin-bottom:12px;color:var(--txt1);}
-.agenda-evento-item{
-  display:flex;align-items:flex-start;gap:10px;padding:10px 12px;
-  background:var(--bg3);border-radius:9px;margin-bottom:8px;
-  border-left:3px solid var(--acc2);
-}
-.agenda-evento-item.concluido{border-left-color:var(--green);opacity:.7;}
-.agenda-evento-hora{font-size:11px;font-weight:700;color:var(--acc);white-space:nowrap;margin-top:2px;}
-.agenda-evento-info{flex:1;}
-.agenda-evento-pac{font-size:13px;font-weight:700;color:var(--txt1);}
-.agenda-evento-tipo{font-size:11px;color:var(--txt3);margin-top:1px;}
-.agenda-evento-btns{display:flex;gap:5px;flex-shrink:0;}
-.btn-ev-del{background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;padding:2px;border-radius:4px;transition:.15s;}
-.btn-ev-del:hover{color:var(--red);}
-.btn-ev-ok{background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;padding:2px;border-radius:4px;transition:.15s;}
-.btn-ev-ok:hover{color:var(--green);}
-.agenda-vazio{text-align:center;color:var(--txt3);font-size:13px;padding:20px 0;}
-
-/* ── R26 — botão relatório na topbar ── */
-.btn-relatorio{
-  padding:8px 14px;border-radius:var(--radius);font-size:12.5px;font-weight:600;cursor:pointer;
-  background:var(--bg3);border:1.5px solid var(--border2);color:var(--txt2);
-  transition:.2s;display:flex;align-items:center;gap:6px;
-}
-.btn-relatorio:hover{border-color:var(--acc);color:var(--acc);}
-
 /* ── PROTOCOLOS — ocultos por padrão ── */
+/* ── Botão relatório topbar ── */
+.btn-relatorio{padding:8px 14px;border-radius:var(--radius);font-size:12.5px;font-weight:600;cursor:pointer;background:var(--bg3);border:1.5px solid var(--border2);color:var(--txt2);transition:.2s;display:flex;align-items:center;gap:6px;}
+.btn-relatorio:hover{border-color:var(--acc);color:var(--acc);}
+/* ── Modal overlay base ── */
+.modal-overlay-new{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto;}
+.modal-overlay-new.open{display:flex;}
+.modal-box-new{background:var(--bg1);border:1.5px solid var(--border2);border-radius:16px;width:100%;max-width:700px;margin:auto;box-shadow:0 24px 64px rgba(0,0,0,.6);overflow:hidden;}
+.modal-head-new{padding:18px 24px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.modal-head-new h2{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;}
+.modal-body-new{padding:20px 24px;overflow-y:auto;max-height:70vh;}
+.modal-foot-new{padding:14px 24px;border-top:1.5px solid var(--border);display:flex;gap:10px;justify-content:flex-end;}
+.btn-modal-close{padding:8px 16px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;background:var(--bg3);border:1.5px solid var(--border2);color:var(--txt2);}
+.btn-modal-action{padding:8px 16px;border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;border:none;background:linear-gradient(135deg,var(--acc2),var(--acc3));color:#fff;}
+/* ── KPI cards ── */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+.kpi-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
+.kpi-val{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;}
+.kpi-lbl{font-size:11px;color:var(--txt3);margin-top:2px;}
+/* ── Bar charts ── */
+.bar-section{margin-bottom:16px;}
+.bar-section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border);}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.bar-label{font-size:12px;color:var(--txt2);width:130px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bar-track{flex:1;height:8px;background:var(--bg3);border-radius:99px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--acc2),var(--acc));transition:width .4s;}
+.bar-count{font-size:11px;color:var(--txt3);width:24px;text-align:right;flex-shrink:0;}
+/* ── Gráfico evolução ── */
+.chart-selector{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.chart-tab{padding:4px 10px;border-radius:99px;font-size:11px;font-weight:600;cursor:pointer;background:var(--bg3);border:1.5px solid var(--border2);color:var(--txt3);}
+.chart-tab.ativa{background:rgba(79,110,247,.15);border-color:var(--acc2);color:var(--acc);}
+.chart-wrap{width:100%;height:240px;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+/* ── Supervisão ── */
+.supervisao-resumo{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:12.5px;color:var(--txt2);line-height:1.7;}
+/* ── Notificação ── */
+.notif-banner{background:rgba(251,191,36,.07);border:1.5px solid rgba(251,191,36,.25);border-radius:var(--radius);padding:12px 16px;margin-bottom:12px;display:none;gap:10px;align-items:flex-start;}
+.notif-banner.visible{display:flex;}
+.notif-banner-title{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;}
+.notif-lista li{font-size:12px;color:var(--txt2);}
+.notif-lista li span{color:var(--amber);font-weight:600;}
+/* ── Agenda ── */
+.agenda-wrap{display:grid;grid-template-columns:1fr 320px;gap:18px;}
+@media(max-width:850px){.agenda-wrap{grid-template-columns:1fr;}}
+.agenda-cal{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;}
+.agenda-cal-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1.5px solid var(--border);}
+.agenda-cal-nav{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:18px;padding:4px 8px;border-radius:6px;}
+.agenda-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);}
+.agenda-dow{background:var(--bg1);padding:7px 4px;text-align:center;font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;}
+.agenda-day{background:var(--bg2);padding:6px;min-height:56px;cursor:pointer;transition:background .15s;}
+.agenda-day:hover{background:var(--bg3);}
+.agenda-day.outro-mes{opacity:.3;}
+.agenda-day.hoje .agenda-day-num{color:var(--acc);font-weight:800;}
+.agenda-day.selecionado{background:rgba(79,110,247,.12);}
+.agenda-day-num{font-size:11px;color:var(--txt2);margin-bottom:3px;}
+.agenda-evento-pill{font-size:9px;font-weight:600;padding:1px 4px;border-radius:3px;background:rgba(79,110,247,.2);color:var(--acc);margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.agenda-side{display:flex;flex-direction:column;gap:14px;}
+.agenda-form-box{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:16px;}
+.agenda-lista-box{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:16px;}
+.agenda-evento-item{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;background:var(--bg3);border-radius:8px;margin-bottom:7px;border-left:3px solid var(--acc2);}
+.agenda-evento-item.concluido{opacity:.6;border-left-color:var(--green);}
+.agenda-evento-hora{font-size:11px;font-weight:700;color:var(--acc);white-space:nowrap;}
+.agenda-evento-pac{font-size:13px;font-weight:700;color:var(--txt1);}
+.agenda-evento-tipo{font-size:11px;color:var(--txt3);}
+.btn-ev{background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;border-radius:4px;color:var(--txt3);}
+.btn-ev:hover{color:var(--txt1);}
+.btn-agendar{width:100%;padding:10px;border-radius:var(--radius);font-size:13px;font-weight:700;cursor:pointer;border:none;background:linear-gradient(135deg,var(--acc2),var(--acc3));color:#fff;margin-top:6px;}
+#viewAgenda{display:none;}
 [id^="abaProtocolo"]{display:none;}
 
 /* ── PROC — Checkboxes múltipla seleção ── */
@@ -942,7 +777,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <p class="bv-sub" id="bvSub">Sistema Fonoaudiológico · Anamnese</p>
     <div class="bv-badge">
       <div class="bv-badge-dot"></div>
-      v27.0 · Sistema Online
+      v31.0 · Sistema Online
     </div>
     <div class="bv-hint"><div class="bv-hint-dot"></div>Clique para entrar</div>
   </div>
@@ -1010,7 +845,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
 
     <div class="auth-field">
       <span class="ico">🔒</span>
-      <input type="password" id="authSenha" placeholder="Senha (mín. 8 caracteres, 1 maiúscula e 1 número)" autocomplete="current-password">
+      <input type="password" id="authSenha" placeholder="Senha (mín. 6 caracteres)" autocomplete="current-password">
     </div>
 
     <div id="campoConfirmar" style="display:none;">
@@ -1025,13 +860,11 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
 
     <button class="btn-auth" id="btnAuthAcao">🔑 Entrar no Sistema</button>
 
-
-
     <!-- Badge de versão -->
     <div style="text-align:center;margin-top:18px;">
       <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--txt3);background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:4px 12px;">
         <span style="width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(52,211,153,.6);display:inline-block;"></span>
-        v27.0 · Fono Facilita
+        v33.0 · Fono Facilita
       </span>
     </div>
   </div>
@@ -1049,7 +882,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
         </div>
       </div>
       <button class="sb-menu-btn" id="btnDashboard">📋 Painel Geral</button>
-      <button class="sb-menu-btn" id="btnAgenda" onclick="abrirAgenda()">📅 Agenda</button>
+      <button class="sb-menu-btn" id="btnAgendaSB">📅 Agenda</button>
     </div>
     <div class="sb-section" style="padding-bottom:6px;">
       <div class="sb-sec-title">Pacientes Cadastrados</div>
@@ -1078,62 +911,45 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
         </p>
       </div>
       <button class="btn-novo" id="btnNovo">+ Criar Novo Paciente</button>
-      <button class="btn-relatorio" id="btnRelatorio" onclick="abrirRelatorio()">📊 Relatório</button>
-      <button class="btn-relatorio" onclick="abrirDashboard()" style="--acc:#a78bfa;border-color:rgba(167,139,250,.3);color:var(--purple);">👑 Supervisor</button>
+      <button class="btn-relatorio" id="btnRelatorio">📊 Relatório</button>
+      <button class="btn-relatorio" id="btnSupervisor" style="border-color:rgba(167,139,250,.3);color:var(--purple);">👑 Supervisor</button>
     </div>
 
     <div class="content-scroll">
-      <!-- R21 — AGENDA DE SESSÕES -->
+
+      <!-- Notificação fichas sem atualização -->
+      <div class="notif-banner" id="notifBanner">
+        <div style="font-size:20px;flex-shrink:0;">⚠️</div>
+        <div style="flex:1;">
+          <div class="notif-banner-title">Pacientes sem atualização há mais de 30 dias</div>
+          <ul class="notif-lista" id="notifLista" style="list-style:none;padding:0;margin:0;"></ul>
+        </div>
+        <button style="background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px;" onclick="this.parentElement.classList.remove('visible')">✕</button>
+      </div>
+
+      <!-- AGENDA -->
       <div id="viewAgenda">
         <div class="agenda-wrap">
-          <!-- Calendário -->
           <div class="agenda-cal">
             <div class="agenda-cal-head">
-              <button class="agenda-cal-nav" onclick="agendaMesAnterior()">‹</button>
-              <h3 id="agendaMesLabel">—</h3>
-              <button class="agenda-cal-nav" onclick="agendaProxMes()">›</button>
+              <button class="agenda-cal-nav" id="btnAgendaAnterior">‹</button>
+              <span id="agendaMesLabel" style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;">—</span>
+              <button class="agenda-cal-nav" id="btnAgendaProx">›</button>
             </div>
-            <div class="agenda-cal-grid" id="agendaCalGrid"></div>
+            <div class="agenda-cal-grid" id="agendaGrid"></div>
           </div>
-
           <div class="agenda-side">
-            <!-- Formulário de agendamento -->
-            <div class="agenda-form">
-              <h3>📅 Novo Agendamento</h3>
-              <div class="fgrp">
-                <label>Paciente</label>
-                <select id="agendaPaciente">
-                  <option value="">Selecione o paciente...</option>
-                </select>
-              </div>
-              <div class="fgrp">
-                <label>Data</label>
-                <input type="date" id="agendaData">
-              </div>
-              <div class="fgrp">
-                <label>Horário</label>
-                <input type="time" id="agendaHora" value="08:00">
-              </div>
-              <div class="fgrp">
-                <label>Tipo de sessão</label>
-                <select id="agendaTipo">
-                  <option>Avaliação inicial</option>
-                  <option>Sessão de terapia</option>
-                  <option>Reavaliação</option>
-                  <option>Alta</option>
-                  <option>Outro</option>
-                </select>
-              </div>
-              <div class="fgrp">
-                <label>Observação (opcional)</label>
-                <textarea id="agendaObs" placeholder="Ex: Trazer exames anteriores..." style="min-height:60px;"></textarea>
-              </div>
-              <button class="btn-agendar" onclick="salvarAgendamento()">+ Agendar Sessão</button>
+            <div class="agenda-form-box">
+              <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;margin-bottom:12px;">📅 Novo Agendamento</div>
+              <div class="fgrp"><label>Paciente</label><select id="agendaPaciente"><option value="">Selecione...</option></select></div>
+              <div class="fgrp"><label>Data</label><input type="date" id="agendaData"></div>
+              <div class="fgrp"><label>Horário</label><input type="time" id="agendaHora" value="08:00"></div>
+              <div class="fgrp"><label>Tipo</label><select id="agendaTipo"><option>Avaliação inicial</option><option>Sessão de terapia</option><option>Reavaliação</option><option>Alta</option><option>Outro</option></select></div>
+              <div class="fgrp"><label>Observação</label><textarea id="agendaObs" style="min-height:55px;" placeholder="Opcional..."></textarea></div>
+              <button class="btn-agendar" id="btnAgendar">+ Agendar Sessão</button>
             </div>
-
-            <!-- Lista do dia selecionado -->
-            <div class="agenda-lista">
-              <h3 id="agendaListaTitulo">Sessões de hoje</h3>
+            <div class="agenda-lista-box">
+              <div id="agendaListaTitulo" style="font-family:'Syne',sans-serif;font-size:13px;font-weight:800;margin-bottom:10px;">Sessões</div>
               <div id="agendaListaItens"></div>
             </div>
           </div>
@@ -1142,16 +958,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
 
       <!-- PAINEL TABELA -->
       <div id="viewTabela">
-
-        <!-- R27 — Notificações de fichas sem atualização -->
-        <div class="notif-banner" id="notifBanner">
-          <div class="notif-banner-icon">⚠️</div>
-          <div class="notif-banner-body">
-            <div class="notif-banner-title">Pacientes sem atualização há mais de 30 dias</div>
-            <ul class="notif-banner-list" id="notifLista"></ul>
-          </div>
-          <button class="notif-close" onclick="$('notifBanner').classList.remove('visible')" title="Fechar">✕</button>
-        </div>
         <div class="stats-row" id="statsRow">
           <div class="stat-card">
             <div class="stat-icon">👶</div>
@@ -1460,7 +1266,6 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
 
             <div class="form-actions">
               <button type="button" class="btn-cancel" id="btnCancelar">← Voltar</button>
-              <button type="button" class="btn-supervisao" id="btnSupervisao" onclick="abrirSupervisao()">👑 Enviar para Supervisão</button>
               <button type="submit" class="btn-finish">✅ Concluir Ficha</button>
             </div>
 
@@ -2239,74 +2044,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
   </main>
 </div>
 
-<!-- R22 — Modal Gráfico de Evolução -->
-<div class="evolucao-chart-overlay" id="evolucaoChartOverlay" onclick="if(event.target===this)fecharGraficoEvolucao()">
-  <div class="evolucao-chart-modal">
-    <div class="evolucao-chart-head">
-      <h2>📈 Evolução do Paciente</h2>
-      <button class="btn-rel-close" onclick="fecharGraficoEvolucao()">✕ Fechar</button>
-    </div>
-    <div class="evolucao-chart-body">
-      <div class="evolucao-chart-selector" id="chartSelector"></div>
-      <div class="evolucao-chart-wrap">
-        <canvas class="evolucao-chart-canvas" id="evolucaoCanvas"></canvas>
-        <div class="evolucao-chart-empty" id="evolucaoChartEmpty" style="display:none;">Sem dados suficientes para gerar o gráfico.</div>
-      </div>
-      <div class="evolucao-chart-legend" id="chartLegend"></div>
-    </div>
-  </div>
-</div>
-
-<!-- R25 — Dashboard do Supervisor -->
-<div class="dashboard-overlay" id="dashboardOverlay" onclick="if(event.target===this)fecharDashboard()">
-  <div class="dashboard-modal">
-    <div class="dashboard-head">
-      <h2>👑 Dashboard do Supervisor</h2>
-      <button class="btn-rel-close" onclick="fecharDashboard()">✕ Fechar</button>
-    </div>
-    <div class="dashboard-body" id="dashboardBody"></div>
-  </div>
-</div>
-
-<!-- R24 — Enviar para Supervisão -->
-<div class="supervisao-overlay" id="supervisaoOverlay" onclick="if(event.target===this)fecharSupervisao()">
-  <div class="supervisao-modal">
-    <div class="supervisao-head">
-      <h2>👑 Enviar para Supervisão</h2>
-      <button class="btn-rel-close" onclick="fecharSupervisao()">✕</button>
-    </div>
-    <div class="supervisao-body">
-      <div class="supervisao-resumo" id="supervisaoResumo"></div>
-      <div class="fgrp">
-        <label>E-mail do supervisor</label>
-        <input type="email" id="supervisaoEmail" placeholder="supervisor@universidade.edu.br">
-      </div>
-      <div class="fgrp">
-        <label>Observação (opcional)</label>
-        <textarea id="supervisaoObs" placeholder="Descreva dúvidas ou pontos para revisão..." style="min-height:90px;"></textarea>
-      </div>
-    </div>
-    <div class="supervisao-foot">
-      <button class="btn-rel-close" onclick="fecharSupervisao()">Cancelar</button>
-      <button class="btn-supv-send" onclick="enviarSupervisao()">📨 Enviar por E-mail</button>
-    </div>
-  </div>
-</div>
-
-<!-- R26 — Modal Relatório Estatístico -->
-<div class="relatorio-overlay" id="relatorioOverlay" onclick="if(event.target===this)fecharRelatorio()">
-  <div class="relatorio-modal">
-    <div class="relatorio-head">
-      <h2>📊 Relatório Estatístico</h2>
-      <button class="btn-rel-close" onclick="fecharRelatorio()">✕ Fechar</button>
-    </div>
-    <div class="relatorio-body" id="relatorioBody"></div>
-    <div class="relatorio-foot">
-      <button class="btn-rel-close" onclick="fecharRelatorio()">Fechar</button>
-      <button class="btn-rel-export" onclick="exportarRelatorioCSV()">⬇️ Exportar CSV</button>
-    </div>
-  </div>
-</div>
+<!-- MODAL OPÇÕES PACIENTE -->
 <div class="overlay" id="overlayOpcoes">
   <div class="modal">
     <span class="modal-ico">👶</span>
@@ -2318,7 +2056,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
       <button class="mbtn-wpp" id="btnMWhatsApp">💬 Enviar por WhatsApp</button>
       <button class="mbtn-email" id="btnMEmail">📧 Enviar PDF por E-mail</button>
       <button class="mbtn-exp" id="btnMExportar">📤 Exportar Dados (.json)</button>
-      <button class="mbtn-exp" id="btnMGrafico" style="background:linear-gradient(135deg,var(--acc2),var(--acc3));">📈 Ver Evolução</button>
+      <button class="mbtn-exp" id="btnMGrafico" style="background:linear-gradient(135deg,var(--acc2),var(--acc3));color:#fff;">📈 Ver Evolução</button>
       <button class="mbtn-close" id="btnMFechar">Fechar</button>
     </div>
   </div>
@@ -2465,6 +2203,10 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
 
 <!-- ═══ BOAS-VINDAS — Animação Cinematográfica ═══ -->
 <script>
+// Stubs globais — prevenem erros antes do módulo carregar
+window.$ = function(id) { return document.getElementById(id); };
+window.renderStats = function() {}; // será sobrescrito pelo módulo
+
 (function() {
   let boasVindasConcluidas = false;
   let firebaseCallback = null;
@@ -2600,7 +2342,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
   getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
   onAuthStateChanged, signOut, updateProfile,
-
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
   getFirestore, collection, doc, addDoc, setDoc, getDocs,
@@ -2622,11 +2363,9 @@ const db   = getFirestore(app);
 
 // ── helpers ──
 const $ = id => document.getElementById(id);
-// R31/R32 — Sanitização contra XSS: escapa caracteres HTML em dados do usuário
-const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-// Cache global de pacientes — acessível por todas as funções
-var pacientesCache = [];
-var pacSel = null;
+window.$ = $;
+let pacSel = null;
+let pacientesCache = [];
 let modoAuth = 'login';
 
 function toast(msg, err=false) {
@@ -2641,19 +2380,13 @@ function openModal(id)  { $(id).classList.add('on'); }
 function closeModal(id) { $(id).classList.remove('on'); }
 function fmtDH(iso) {
   if (!iso) return '—';
-  try {
-    const d = iso.toDate ? iso.toDate() : new Date(iso);
-    if (isNaN(d)) return '—';
-    return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-  } catch(e) { return '—'; }
+  const d = iso.toDate ? iso.toDate() : new Date(iso);
+  return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
 }
 function fmtD(iso) {
   if (!iso) return '—';
-  try {
-    const d = iso.toDate ? iso.toDate() : new Date(iso);
-    if (isNaN(d)) return '—';
-    return d.toLocaleDateString('pt-BR');
-  } catch(e) { return '—'; }
+  const d = iso.toDate ? iso.toDate() : new Date(iso);
+  return d.toLocaleDateString('pt-BR');
 }
 function setCloud(estado) {
   const b = $('cloudBadge');
@@ -2664,14 +2397,6 @@ function setCloud(estado) {
 }
 
 // expor funções usadas em onclick inline
-window.abrirRelatorio  = function() { abrirRelatorio(); };
-window.abrirDashboard  = function() { abrirDashboard(); };
-window.abrirAgenda     = function() { abrirAgenda(); };
-window.abrirSupervisao = function() { abrirSupervisao(); };
-window.fecharRelatorio  = function() { fecharRelatorio(); };
-window.fecharDashboard  = function() { fecharDashboard(); };
-window.fecharSupervisao = function() { fecharSupervisao(); };
-window.enviarSupervisao = function() { enviarSupervisao(); };
 window.mudarAba = function(i) {
   const abaEvol = document.getElementById('abaEvolucao');
   const formActions = document.querySelector('.form-actions');
@@ -2752,6 +2477,7 @@ const authTimeoutFallback = setTimeout(() => {
 onAuthStateChanged(auth, async user => {
   clearTimeout(authTimeout);
   clearTimeout(authTimeoutFallback);
+  // Limpa também o timeout de segurança da tela de boas-vindas
   if (window._authTimeoutBv) clearTimeout(window._authTimeoutBv);
   window._bvOnConcluir(async () => {
     document.getElementById('loadingOverlay').style.display = 'none';
@@ -2789,8 +2515,8 @@ async function acaoAuth() {
   try {
     if (modoAuth === 'cadastro') {
       if (senha.length < 8) { $('erroAuth').innerText = '⚠️ Senha deve ter pelo menos 8 caracteres.'; throw null; }
-      if (!/[A-Z]/.test(senha)) { $('erroAuth').innerText = '⚠️ Senha deve ter pelo menos uma letra maiúscula.'; throw null; }
-      if (!/[0-9]/.test(senha)) { $('erroAuth').innerText = '⚠️ Senha deve ter pelo menos um número.'; throw null; }
+      if (!/[A-Z]/.test(senha)) { $('erroAuth').innerText = '⚠️ Senha deve ter pelo menos 1 letra maiúscula.'; throw null; }
+      if (!/[0-9]/.test(senha)) { $('erroAuth').innerText = '⚠️ Senha deve ter pelo menos 1 número.'; throw null; }
       if (senha !== senha2)  { $('erroAuth').innerText = '⚠️ As senhas não conferem.'; throw null; }
       const cred = await createUserWithEmailAndPassword(auth, email, senha);
       if (nome) await updateProfile(cred.user, { displayName: nome });
@@ -2808,60 +2534,21 @@ async function acaoAuth() {
 
 function traduzirErro(code) {
   const m = {
-    'auth/email-already-in-use':    '❌ Este e-mail já está cadastrado. Tente fazer login.',
-    'auth/invalid-email':           '❌ E-mail inválido. Verifique o formato (ex: nome@email.com).',
-    'auth/weak-password':           '❌ Senha fraca. Use pelo menos 8 caracteres, 1 maiúscula e 1 número.',
-    'auth/user-not-found':          '❌ E-mail não encontrado. Verifique ou crie uma conta.',
-    'auth/wrong-password':          '❌ Senha incorreta. Tente novamente ou redefina sua senha.',
-    'auth/invalid-credential':      '❌ E-mail ou senha incorretos. Verifique e tente novamente.',
-    'auth/too-many-requests':       '⏳ Muitas tentativas. Aguarde alguns minutos antes de tentar novamente.',
-    'auth/network-request-failed':  '🌐 Sem conexão com a internet. Verifique sua rede.',
-    'auth/user-disabled':           '🚫 Esta conta foi desativada. Entre em contato com o administrador.',
-    'auth/requires-recent-login':   '🔒 Por segurança, faça login novamente para continuar.',
-    'auth/email-not-verified':      '📧 E-mail não verificado. Confirme seu e-mail antes de entrar.',
-    'auth/operation-not-allowed':   '🚫 Operação não permitida. Entre em contato com o administrador.',
-    'auth/expired-action-code':     '⏳ Link expirado. Solicite um novo e-mail de verificação.',
-    'auth/invalid-action-code':     '❌ Link inválido. Solicite um novo e-mail de verificação.',
-    'auth/missing-email':           '⚠️ Informe o e-mail.',
-    'auth/missing-password':        '⚠️ Informe a senha.',
+    'auth/email-already-in-use':   '❌ Este e-mail já está cadastrado.',
+    'auth/invalid-email':          '❌ E-mail inválido.',
+    'auth/weak-password':          '❌ Senha fraca. Use pelo menos 6 caracteres.',
+    'auth/user-not-found':         '❌ Usuário não encontrado.',
+    'auth/wrong-password':         '❌ Senha incorreta.',
+    'auth/invalid-credential':     '❌ E-mail ou senha incorretos.',
+    'auth/too-many-requests':      '⏳ Muitas tentativas. Aguarde alguns minutos.',
+    'auth/network-request-failed': '🌐 Sem conexão com a internet.',
   };
-  return m[code] || '❌ Erro inesperado. Tente novamente ou recarregue a página.';
+  return m[code] || '❌ Erro: ' + (code || 'desconhecido');
 }
 
 $('btnSair').addEventListener('click', async () => { await signOut(auth); });
 
-// ── GOOGLE AUTH ──
 // R09 — Login com Google removido. Acesso apenas por e-mail + senha.
-
-// ══════════════════════════════════════════════════════════════════
-// R08 — FIRESTORE SECURITY RULES
-// Aplicar estas regras em: Firebase Console → Firestore → Rules
-// ──────────────────────────────────────────────────────────────────
-// rules_version = '2';
-// service cloud.firestore {
-//   match /databases/{database}/documents {
-//
-//     // Pacientes: cada usuário só acessa os seus próprios
-//     match /pacientes/{docId} {
-//       allow read, write: if request.auth != null
-//         && request.auth.uid == resource.data.uid;
-//       allow create: if request.auth != null
-//         && request.auth.uid == request.resource.data.uid;
-//     }
-//
-//     // Usuários: cada um lê/escreve só o próprio perfil
-//     match /usuarios/{userId} {
-//       allow read, write: if request.auth != null
-//         && request.auth.uid == userId;
-//     }
-//
-//     // Negar tudo mais por padrão
-//     match /{document=**} {
-//       allow read, write: if false;
-//     }
-//   }
-// }
-// ══════════════════════════════════════════════════════════════════
 
 // ── FIRESTORE — pacientes ──
 async function carregarPacientes() {
@@ -2877,7 +2564,7 @@ async function carregarPacientes() {
   } catch(e) {
     console.error(e);
     setCloud('err');
-    toast('⚠️ Erro ao carregar pacientes. Verifique sua conexão e tente novamente.', true);
+    toast('⚠️ Erro ao carregar pacientes.', true);
   }
 }
 
@@ -2886,31 +2573,24 @@ async function salvarPacienteFirestore(dados) {
   try {
     const uid = auth.currentUser.uid;
     dados.uid = uid;
-    const agora = new Date().toISOString();
     if (dados.firestoreId) {
       const id = dados.firestoreId;
       delete dados.firestoreId;
       dados.dataEdicao = serverTimestamp();
-      dados.dataEdicaoISO = agora;
       await setDoc(doc(db, 'pacientes', id), dados);
       dados.firestoreId = id;
-      dados.dataEdicao = { toDate: () => new Date(agora) };
     } else {
       dados.dataCriacao = serverTimestamp();
       dados.dataEdicao  = serverTimestamp();
-      dados.dataCriacaoISO = agora;
-      dados.dataEdicaoISO  = agora;
       const ref = await addDoc(collection(db, 'pacientes'), dados);
       dados.firestoreId = ref.id;
-      dados.dataCriacao = { toDate: () => new Date(agora) };
-      dados.dataEdicao  = { toDate: () => new Date(agora) };
     }
     setCloud('ok');
     return dados;
   } catch(e) {
     console.error(e);
     setCloud('err');
-    toast('❌ Erro ao salvar. Verifique sua conexão e tente novamente.', true);
+    toast('❌ Erro ao salvar no Firebase.', true);
     return null;
   }
 }
@@ -2947,8 +2627,6 @@ function renderStats(l) {
     });
     $('stRecente').innerText = s[0].nome.split(' ')[0];
   } else $('stRecente').innerText = '—';
-  // R27 — verificar fichas sem atualização
-  verificarNotificacoes(l);
 }
 
 function renderTabela(l) {
@@ -2962,14 +2640,14 @@ function addLinha(p) {
   const tr = document.createElement('tr');
   tr.setAttribute('data-id', p.firestoreId);
   tr.innerHTML = `
-    <td><strong>${esc(p.nome)}</strong></td>
-    <td>${esc(p.idade)}</td>
-    <td>${esc(p.sexo)}</td>
-    <td>${esc(p.mae)}</td>
+    <td><strong>${p.nome||'—'}</strong></td>
+    <td>${p.idade||'—'}</td>
+    <td>${p.sexo||'—'}</td>
+    <td>${p.mae||'—'}</td>
     <td>${fmtD(p.dataCriacao)}</td>
     <td style="font-family:'DM Mono',monospace;font-size:12px;">${fmtDH(p.dataEdicao)}</td>
-    <td><span class="badge badge-green">✓ ${esc(p.status||'Concluído')}</span></td>
-    <td style="text-align:center;"><button class="btn-del" data-del="${esc(p.firestoreId)}">🗑</button></td>`;
+    <td><span class="badge badge-green">✓ ${p.status||'Concluído'}</span></td>
+    <td style="text-align:center;"><button class="btn-del" data-del="${p.firestoreId}">🗑</button></td>`;
   tr.addEventListener('click', e => { if (e.target.closest('[data-del]')) return; abrirModalPac(p); });
   tr.querySelector('[data-del]').addEventListener('click', e => {
     e.stopPropagation(); deletarPacienteFirestore(p.firestoreId, p.nome);
@@ -3040,6 +2718,7 @@ function irTabela() {
 }
 
 $('btnDashboard').addEventListener('click', () => irTabela());
+$('btnAgendaSB').addEventListener('click', () => window.abrirAgenda());
 $('btnCancelar').addEventListener('click', () => irTabela());
 $('btnNovo').addEventListener('click', () => abrirForm(null));
 
@@ -3195,13 +2874,13 @@ function abrirModalPac(p) {
   $('modalNomePac').innerText = p.nome;
   openModal('overlayOpcoes');
 }
-$('btnMGrafico').addEventListener('click', () => { closeModal('overlayOpcoes'); abrirGraficoEvolucao(pacSel); });
 $('btnMFechar').addEventListener('click', () => closeModal('overlayOpcoes'));
 $('btnMEditar').addEventListener('click', () => { closeModal('overlayOpcoes'); abrirForm(pacSel); });
 $('btnMPDF').addEventListener('click', () => { closeModal('overlayOpcoes'); gerarPDF(pacSel); });
 $('btnMExportar').addEventListener('click', () => { closeModal('overlayOpcoes'); exportJson(pacSel); });
 $('btnMWhatsApp').addEventListener('click', () => { closeModal('overlayOpcoes'); abrirModalWhatsApp(pacSel); });
 $('btnMEmail').addEventListener('click', () => { closeModal('overlayOpcoes'); abrirModalEmail(pacSel); });
+$('btnMGrafico').addEventListener('click', () => { const p = pacSel; closeModal('overlayOpcoes'); setTimeout(() => abrirGraficoEvolucao(p), 150); });
 
 // ── localStorage seguro (evita erros em contextos restritos) ──
 const lsGet = (k) => { try { return localStorage.getItem(k); } catch(e) { return null; } };
@@ -3451,7 +3130,7 @@ function renderEvolucao() {
     card.className = 'evol-card';
     card.setAttribute('data-evol-id', ev.id);
     const dataFmt = ev.data ? new Date(ev.data + 'T12:00:00').toLocaleDateString('pt-BR') : '—';
-    const preview = esc((ev.texto || '').slice(0, 80) + ((ev.texto||'').length > 80 ? '…' : ''));
+    const preview = (ev.texto || '').slice(0, 80) + ((ev.texto||'').length > 80 ? '…' : '');
     const sessaoNum = ordenadas.length - idx;
     card.innerHTML = `
       <div class="evol-card-head" onclick="toggleEvolCard(this)">
@@ -3461,19 +3140,19 @@ function renderEvolucao() {
         <span class="evol-card-chevron">▼</span>
       </div>
       <div class="evol-card-body">
-        <div class="evol-texto" id="evolTextoCard_${esc(ev.id)}">${(ev.texto||'').replace(/</g,'&lt;')}</div>
-        <div class="evol-edit-area" id="evolEditArea_${esc(ev.id)}">
-          <textarea id="evolEditTA_${esc(ev.id)}">${esc(ev.texto)}</textarea>
+        <div class="evol-texto" id="evolTextoCard_${ev.id}">${(ev.texto||'').replace(/</g,'&lt;')}</div>
+        <div class="evol-edit-area" id="evolEditArea_${ev.id}">
+          <textarea id="evolEditTA_${ev.id}">${ev.texto||''}</textarea>
           <div class="evol-edit-btns">
-            <button class="btn-salvar-edit" onclick="salvarEdicaoEvol('${esc(ev.id)}')">💾 Salvar</button>
-            <button class="btn-cancelar-edit" onclick="cancelarEdicaoEvol('${esc(ev.id)}')">Cancelar</button>
+            <button class="btn-salvar-edit" onclick="salvarEdicaoEvol('${ev.id}')">💾 Salvar</button>
+            <button class="btn-cancelar-edit" onclick="cancelarEdicaoEvol('${ev.id}')">Cancelar</button>
           </div>
         </div>
         <div class="evol-card-footer">
-          <span class="evol-autor">✍️ ${esc(ev.autor || 'Profissional')} · ${fmtDH(ev.criadoEm)}</span>
+          <span class="evol-autor">✍️ ${ev.autor || 'Profissional'} · ${fmtDH(ev.criadoEm)}</span>
           <div style="display:flex;gap:7px;">
-            <button class="btn-del-evol" style="background:rgba(124,158,255,.09);color:var(--acc);border-color:rgba(124,158,255,.2);" onclick="editarEvol('${esc(ev.id)}')">✏️ Editar</button>
-            <button class="btn-del-evol" onclick="deletarEvol('${esc(ev.id)}')">🗑 Excluir</button>
+            <button class="btn-del-evol" style="background:rgba(124,158,255,.09);color:var(--acc);border-color:rgba(124,158,255,.2);" onclick="editarEvol('${ev.id}')">✏️ Editar</button>
+            <button class="btn-del-evol" onclick="deletarEvol('${ev.id}')">🗑 Excluir</button>
           </div>
         </div>
       </div>`;
@@ -3749,23 +3428,6 @@ async function _gerarPDFInterno(p, modo) {
     ['Tipo OD',p.audTipoOD],['Tipo OE',p.audTipoOE],
     ['Parecer',p.audParecer],['Grau',p.audGrau],['Obs.',p.audObs],
   ]);
-
-  // R23 — Inserir audiograma do canvas no PDF
-  try {
-    const audCanvas = document.getElementById('audCanvas');
-    if (audCanvas) {
-      const imgData = audCanvas.toDataURL('image/png');
-      const imgW = W - 28;
-      const imgH = Math.round(imgW * (audCanvas.height / audCanvas.width));
-      novaPag(imgH * 0.264 + 16);
-      doc.setFillColor(22,34,72); doc.roundedRect(10,y-5,W-20,10,2,2,'F');
-      doc.setFillColor(79,110,247); doc.roundedRect(10,y-5,4,10,1,1,'F');
-      doc.setTextColor(180,200,255); doc.setFont('helvetica','bold'); doc.setFontSize(9.5);
-      doc.text('AUDIOGRAMA',18,y+1.5); y+=12;
-      doc.addImage(imgData,'PNG',14,y,imgW,imgH * 0.264);
-      y += imgH * 0.264 + 6;
-    }
-  } catch(e) { console.warn('Audiograma não disponível para PDF:', e); }
   bloco('IMITANCIOMETRIA',[['Timpanograma OD',p.impTipoOD],['Timpanograma OE',p.impTipoOE],['Reflexo OD',p.impReflexoOD],['Reflexo OE',p.impReflexoOE],['Obs.',p.impObs]]);
   bloco('BERA/PEATE',[['Limiar OD',p.beraLimiarOD],['Limiar OE',p.beraLimiarOE],['Onda V OD',p.beraV_OD],['Onda V OE',p.beraV_OE],['Resultado OD',p.beraResOD],['Resultado OE',p.beraResOE],['Obs.',p.beraObs]]);
   bloco('PAC',[['Fig-fundo OD',p.pacFFOD],['Fig-fundo OE',p.pacFFOE],['Dicótico OD',p.pacDicOD],['Dicótico OE',p.pacDicOE],['Resultado',p.pacResultado],['Obs.',p.pacObs]]);
@@ -3863,13 +3525,13 @@ async function _gerarPDFInterno(p, modo) {
   return true;
 }
 
-async function gerarPDF(p) {
+window.gerarPDF = async function(p) {
   if (!p) return;
   toast('⏳ Preparando PDF...');
   const ok = await _gerarPDFInterno(p, 'download');
   if (ok === null) { toast('❌ Erro ao carregar gerador de PDF.', true); return; }
   toast('🖨️ PDF gerado com sucesso!');
-}
+};
 
 async function gerarPDFBase64(p) {
   return await _gerarPDFInterno(p, 'base64');
@@ -4682,579 +4344,240 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ══════════════════════════════════════════════════════════
-// R27 — NOTIFICAÇÕES: fichas sem atualização há +30 dias
+// NOVOS RECURSOS — declarados como window.* para acesso global
 // ══════════════════════════════════════════════════════════
-function verificarNotificacoes(lista) {
-  const DIAS = 30;
-  const agora = new Date();
-  const atrasados = lista.filter(p => {
-    if (!p.dataEdicao) return false;
-    const dt = p.dataEdicao.toDate ? p.dataEdicao.toDate() : new Date(p.dataEdicao);
-    return (agora - dt) / (1000 * 60 * 60 * 24) >= DIAS;
-  }).sort((a, b) => {
-    const da = a.dataEdicao.toDate ? a.dataEdicao.toDate() : new Date(a.dataEdicao);
-    const db2 = b.dataEdicao.toDate ? b.dataEdicao.toDate() : new Date(b.dataEdicao);
-    return da - db2;
-  });
 
-  const banner = $('notifBanner');
-  const listaEl = $('notifLista');
-  listaEl.innerHTML = '';
-  if (!atrasados.length) { banner.classList.remove('visible'); return; }
+// ── Relatório ──
+window.fecharRelatorio = function() { $('modalRelatorio').classList.remove('open'); };
+window.abrirRelatorio = function() {
+  const lista = pacientesCache || [];
+  const total = lista.length;
+  const masc = lista.filter(p=>p.sexo==='Masculino').length;
+  const fem  = lista.filter(p=>p.sexo==='Feminino').length;
+  const conc = lista.filter(p=>p.status==='Concluído').length;
+  const andamento = lista.filter(p=>p.status!=='Concluído').length;
+  const toMap = fn => { const m={}; lista.forEach(p=>{const k=fn(p);if(k)m[k]=(m[k]||0)+1;}); return Object.entries(m).sort((a,b)=>b[1]-a[1]); };
+  const convenios = toMap(p=>p.convenio||'Não informado').slice(0,5);
+  const meses={}; for(let i=5;i>=0;i--){const d=new Date(new Date().getFullYear(),new Date().getMonth()-i,1);meses[d.toLocaleString('pt-BR',{month:'short',year:'2-digit'})]=0;}
+  lista.forEach(p=>{if(!p.dataCriacao)return;const dt=p.dataCriacao.toDate?p.dataCriacao.toDate():new Date(p.dataCriacao);const k=dt.toLocaleString('pt-BR',{month:'short',year:'2-digit'});if(k in meses)meses[k]++;});
+  const bars=(items,max)=>items.map(([l,n])=>`<div class="bar-row"><div class="bar-label" title="${l}">${l}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round((n/(max||1))*100)}%"></div></div><div class="bar-count">${n}</div></div>`).join('');
+  const mArr=Object.entries(meses);
+  $('relatorioBody').innerHTML=`
+    <div class="kpi-row"><div class="kpi-card"><div class="kpi-val">${total}</div><div class="kpi-lbl">Total</div></div><div class="kpi-card"><div class="kpi-val">${conc}</div><div class="kpi-lbl">Concluídos</div></div><div class="kpi-card"><div class="kpi-val">${andamento}</div><div class="kpi-lbl">Em andamento</div></div></div>
+    <div class="bar-section"><div class="bar-section-title">Sexo</div>${bars([['Masculino',masc],['Feminino',fem],['Não informado',total-masc-fem]],Math.max(masc,fem,1))}</div>
+    ${convenios.length?`<div class="bar-section"><div class="bar-section-title">Convênio</div>${bars(convenios,convenios[0]?.[1]||1)}</div>`:''}
+    <div class="bar-section"><div class="bar-section-title">Cadastros por mês</div>${bars(mArr,Math.max(...mArr.map(e=>e[1]),1))}</div>`;
+  $('modalRelatorio').classList.add('open');
+};
+window.exportarRelatorioCSV = function() {
+  const lista=pacientesCache||[];
+  const linhas=[['Nome','Sexo','Status','Convênio']];
+  lista.forEach(p=>linhas.push([p.nome||'—',p.sexo||'—',p.status||'—',p.convenio||'—']));
+  const csv=linhas.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));
+  a.download=`Relatorio_${new Date().toLocaleDateString('pt-BR').replace(/\//g,'-')}.csv`;a.click();
+};
 
-  atrasados.slice(0, 5).forEach(p => {
-    const dt = p.dataEdicao.toDate ? p.dataEdicao.toDate() : new Date(p.dataEdicao);
-    const dias = Math.floor((agora - dt) / (1000 * 60 * 60 * 24));
-    const li = document.createElement('li');
-    li.innerHTML = `👤 ${esc(p.nome)} — sem atualização há <span>${dias} dias</span>`;
-    listaEl.appendChild(li);
-  });
-  if (atrasados.length > 5) {
-    const li = document.createElement('li');
-    li.innerHTML = `<span>+${atrasados.length - 5} outros pacientes</span>`;
-    listaEl.appendChild(li);
-  }
+// ── Dashboard ──
+window.fecharDashboard = function() { $('modalDashboard').classList.remove('open'); };
+window.abrirDashboard = function() {
+  const lista=pacientesCache||[];
+  const total=lista.length, conc=lista.filter(p=>p.status==='Concluído').length;
+  const andamento=lista.filter(p=>p.status!=='Concluído').length;
+  const agora=new Date();
+  const atrasados=lista.filter(p=>{if(!p.dataEdicao)return false;try{const dt=p.dataEdicao.toDate?p.dataEdicao.toDate():new Date(p.dataEdicao);return(agora-dt)/(1000*60*60*24)>=30;}catch{return false;}}).length;
+  const recentes=[...lista].sort((a,b)=>{try{const da=a.dataEdicao?(a.dataEdicao.toDate?a.dataEdicao.toDate():new Date(a.dataEdicao)):0;const db2=b.dataEdicao?(b.dataEdicao.toDate?b.dataEdicao.toDate():new Date(b.dataEdicao)):0;return db2-da;}catch{return 0;}}).slice(0,6);
+  $('dashboardBody').innerHTML=`<div style="padding:0 0 16px;">
+    <div class="kpi-row" style="grid-template-columns:repeat(4,1fr);">
+      <div class="kpi-card"><div class="kpi-val">${total}</div><div class="kpi-lbl">Total</div></div>
+      <div class="kpi-card"><div class="kpi-val">${conc}</div><div class="kpi-lbl">Concluídos</div></div>
+      <div class="kpi-card"><div class="kpi-val">${andamento}</div><div class="kpi-lbl">Em andamento</div></div>
+      <div class="kpi-card"><div class="kpi-val" style="color:var(--amber)">${atrasados}</div><div class="kpi-lbl">+30d sem atualiz.</div></div>
+    </div>
+    <div class="bar-section" style="margin-top:16px;"><div class="bar-section-title">Últimas fichas</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+        <thead><tr style="border-bottom:1.5px solid var(--border);"><th style="text-align:left;padding:6px 8px;color:var(--txt3);font-size:11px;">Paciente</th><th style="text-align:left;padding:6px 8px;color:var(--txt3);font-size:11px;">Status</th><th style="text-align:left;padding:6px 8px;color:var(--txt3);font-size:11px;">Última edição</th></tr></thead>
+        <tbody>${recentes.map(p=>{let dt='—';try{const d=p.dataEdicao?(p.dataEdicao.toDate?p.dataEdicao.toDate():new Date(p.dataEdicao)):null;if(d&&!isNaN(d))dt=d.toLocaleDateString('pt-BR');}catch{}return`<tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;color:var(--txt1);font-weight:600;">${p.nome||'—'}</td><td style="padding:8px;color:var(--txt2);">${p.status||'—'}</td><td style="padding:8px;color:var(--txt2);">${dt}</td></tr>`;}).join('')}</tbody>
+      </table>
+    </div></div>`;
+  $('modalDashboard').classList.add('open');
+};
+
+// ── Supervisão ──
+let _pacSupv = null;
+window.fecharSupervisao = function() { $('modalSupervisao').classList.remove('open'); };
+window.abrirSupervisao = function() {
+  const editId=$('formAnamnese').getAttribute('data-edit-id');
+  _pacSupv=editId?(pacientesCache||[]).find(p=>p.firestoreId===editId):null;
+  if(!_pacSupv){toast('⚠️ Salve a ficha antes de enviar.',true);return;}
+  const p=_pacSupv;
+  $('supervisaoResumo').innerHTML=`<strong>Paciente:</strong> ${p.nome||'—'}<br><strong>Queixa:</strong> ${p.queixa?p.queixa.slice(0,80):'—'}<br><strong>Status:</strong> ${p.status||'—'}`;
+  $('supervisaoEmail').value='';$('supervisaoObs').value='';
+  $('modalSupervisao').classList.add('open');
+};
+window.enviarSupervisao = function() {
+  const email=$('supervisaoEmail').value.trim();
+  if(!email||!email.includes('@')){toast('⚠️ Informe um e-mail válido.',true);return;}
+  const p=_pacSupv||{};
+  const assunto=encodeURIComponent(`[Fono Facilita] Ficha — ${p.nome||'Paciente'}`);
+  const obs=$('supervisaoObs').value.trim();
+  const corpo=encodeURIComponent(`Paciente: ${p.nome||'—'}\nQueixa: ${p.queixa||'—'}\nStatus: ${p.status||'—'}${obs?'\n\nObservações:\n'+obs:''}\n\nFono Facilita`);
+  window.open(`mailto:${email}?subject=${assunto}&body=${corpo}`,'_blank');
+  window.fecharSupervisao();toast('📨 E-mail aberto!');
+};
+
+// ── Gráfico Evolução ──
+const CHART_SERIES=[{key:'procTotGeral',label:'PROC Total',color:'#4f6ef7'},{key:'procTotHab',label:'PROC Hab.',color:'#34d399'},{key:'tvipEscore',label:'TVIP',color:'#a78bfa'}];
+let _chartSerieAtiva='procTotGeral',_chartPac=null;
+window.fecharGraficoEvolucao=function(){$('modalGrafico').classList.remove('open');};
+window.abrirGraficoEvolucao=function(pac){
+  _chartPac=pac;_chartSerieAtiva='procTotGeral';
+  const sel=$('chartSelector');sel.innerHTML='';
+  CHART_SERIES.forEach(s=>{const btn=document.createElement('button');btn.className='chart-tab'+(s.key===_chartSerieAtiva?' ativa':'');btn.textContent=s.label;btn.onclick=()=>{_chartSerieAtiva=s.key;sel.querySelectorAll('.chart-tab').forEach(b=>b.classList.remove('ativa'));btn.classList.add('ativa');window.desenharGrafico();};sel.appendChild(btn);});
+  $('modalGrafico').classList.add('open');setTimeout(window.desenharGrafico,100);
+};
+window.desenharGrafico=function(){
+  const canvas=$('evolucaoCanvas');if(!canvas)return;
+  const pac=_chartPac;const serie=CHART_SERIES.find(s=>s.key===_chartSerieAtiva)||CHART_SERIES[0];
+  const evols=(pac?.evolucao||[]).filter(ev=>ev[serie.key]!==undefined&&ev[serie.key]!=='');
+  const pontos=[];
+  evols.forEach((ev,i)=>{const v=parseFloat(ev[serie.key]);if(!isNaN(v))pontos.push({label:ev.data||`S${i+1}`,val:v});});
+  if(pac?.[serie.key]&&pontos.length===0)pontos.push({label:'Atual',val:parseFloat(pac[serie.key])});
+  $('chartLegend').textContent=`${serie.label} — ${pontos.length} ponto(s)`;
+  if(!pontos.length)return;
+  const W=canvas.offsetWidth||600,H=canvas.offsetHeight||240;canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');ctx.clearRect(0,0,W,H);
+  const PAD={top:20,right:20,bottom:36,left:40},cW=W-PAD.left-PAD.right,cH=H-PAD.top-PAD.bottom;
+  const vals=pontos.map(p=>p.val),minV=Math.max(0,Math.min(...vals)-5),maxV=Math.max(...vals)+5;
+  ctx.strokeStyle='rgba(36,48,80,.6)';ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){const yp=PAD.top+(cH/4)*i;ctx.beginPath();ctx.moveTo(PAD.left,yp);ctx.lineTo(PAD.left+cW,yp);ctx.stroke();ctx.fillStyle='rgba(78,96,125,.7)';ctx.font='10px sans-serif';ctx.textAlign='right';ctx.fillText(Math.round(maxV-((maxV-minV)/4)*i),PAD.left-4,yp+4);}
+  const xOf=i=>PAD.left+(i/(Math.max(pontos.length-1,1)))*cW,yOf=v=>PAD.top+cH-((v-minV)/((maxV-minV)||1))*cH;
+  const grad=ctx.createLinearGradient(0,PAD.top,0,PAD.top+cH);grad.addColorStop(0,serie.color+'44');grad.addColorStop(1,serie.color+'05');
+  ctx.beginPath();pontos.forEach((p,i)=>i===0?ctx.moveTo(xOf(i),yOf(p.val)):ctx.lineTo(xOf(i),yOf(p.val)));ctx.lineTo(xOf(pontos.length-1),PAD.top+cH);ctx.lineTo(PAD.left,PAD.top+cH);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+  ctx.beginPath();ctx.strokeStyle=serie.color;ctx.lineWidth=2.5;ctx.lineJoin='round';pontos.forEach((p,i)=>i===0?ctx.moveTo(xOf(i),yOf(p.val)):ctx.lineTo(xOf(i),yOf(p.val)));ctx.stroke();
+  pontos.forEach((p,i)=>{ctx.beginPath();ctx.arc(xOf(i),yOf(p.val),5,0,Math.PI*2);ctx.fillStyle=serie.color;ctx.fill();ctx.strokeStyle='#0d1220';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle=serie.color;ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.fillText(p.val,xOf(i),yOf(p.val)-10);});
+  ctx.fillStyle='rgba(78,96,125,.7)';ctx.font='10px sans-serif';ctx.textAlign='center';pontos.forEach((p,i)=>ctx.fillText(p.label.slice(0,6),xOf(i),PAD.top+cH+16));
+};
+
+// ── Notificações ──
+function verificarNotificacoes(lista){
+  const agora=new Date(),atrasados=lista.filter(p=>{if(!p.dataEdicao)return false;try{const dt=p.dataEdicao.toDate?p.dataEdicao.toDate():new Date(p.dataEdicao);return(agora-dt)/(1000*60*60*24)>=30;}catch{return false;}});
+  const banner=$('notifBanner'),liEl=$('notifLista');if(!liEl)return;liEl.innerHTML='';
+  if(!atrasados.length){banner.classList.remove('visible');return;}
+  atrasados.slice(0,5).forEach(p=>{try{const dt=p.dataEdicao.toDate?p.dataEdicao.toDate():new Date(p.dataEdicao);const dias=Math.floor((agora-dt)/(1000*60*60*24));const li=document.createElement('li');li.innerHTML=`👤 ${p.nome||'—'} — <span>${dias} dias</span>`;liEl.appendChild(li);}catch{}});
   banner.classList.add('visible');
 }
 
-// ══════════════════════════════════════════════════════════
-// R26 — RELATÓRIO ESTATÍSTICO
-// ══════════════════════════════════════════════════════════
-function abrirRelatorio() {
-  const lista = pacientesCache || [];
-  const total  = lista.length;
-  const masc   = lista.filter(p => p.sexo === 'Masculino').length;
-  const fem    = lista.filter(p => p.sexo === 'Feminino').length;
-  const conc   = lista.filter(p => p.status === 'Concluído').length;
-  const andamento = lista.filter(p => p.status === 'Em andamento').length;
-
-  const toMap = (arr, fn) => {
-    const m = {};
-    arr.forEach(p => { const k = fn(p); if(k) m[k] = (m[k]||0)+1; });
-    return Object.entries(m).sort((a,b)=>b[1]-a[1]);
-  };
-
-  const convenios = toMap(lista, p => p.convenio || 'Não informado').slice(0,6);
-  const queixas   = toMap(lista, p => p.queixa ? p.queixa.trim().split(/[.,\n]/)[0].slice(0,40) : null).slice(0,5);
-
-  const meses = {};
-  for (let i=5;i>=0;i--) {
-    const d = new Date(new Date().getFullYear(), new Date().getMonth()-i, 1);
-    meses[d.toLocaleString('pt-BR',{month:'short',year:'2-digit'})] = 0;
-  }
-  lista.forEach(p => {
-    if (!p.dataCriacao) return;
-    const dt = p.dataCriacao.toDate ? p.dataCriacao.toDate() : new Date(p.dataCriacao);
-    const k = dt.toLocaleString('pt-BR',{month:'short',year:'2-digit'});
-    if (k in meses) meses[k]++;
-  });
-
-  const barras = (items, max) => items.map(([lbl,n]) =>
-    `<div class="rel-bar-row">
-      <div class="rel-bar-label" title="${lbl}">${lbl}</div>
-      <div class="rel-bar-track"><div class="rel-bar-fill" style="width:${Math.round((n/max)*100)}%"></div></div>
-      <div class="rel-bar-count">${n}</div>
-    </div>`).join('');
-
-  const mesesArr = Object.entries(meses);
-  $('relatorioBody').innerHTML = `
-    <div class="rel-section">
-      <div class="rel-section-title">Visão geral</div>
-      <div class="rel-grid">
-        <div class="rel-card"><div class="rel-card-val">${total}</div><div class="rel-card-lbl">Total de pacientes</div></div>
-        <div class="rel-card"><div class="rel-card-val">${conc}</div><div class="rel-card-lbl">Fichas concluídas</div></div>
-        <div class="rel-card"><div class="rel-card-val">${andamento}</div><div class="rel-card-lbl">Em andamento</div></div>
-      </div>
-    </div>
-    <div class="rel-section">
-      <div class="rel-section-title">Distribuição por sexo</div>
-      ${barras([['Masculino',masc],['Feminino',fem],['Não informado',total-masc-fem]], Math.max(masc,fem,total-masc-fem,1))}
-    </div>
-    ${convenios.length?`<div class="rel-section"><div class="rel-section-title">Convênio / Plano</div>${barras(convenios,convenios[0][1])}</div>`:''}
-    ${queixas.length?`<div class="rel-section"><div class="rel-section-title">Queixas mais frequentes</div>${barras(queixas,queixas[0][1])}</div>`:''}
-    <div class="rel-section">
-      <div class="rel-section-title">Cadastros por mês</div>
-      ${barras(mesesArr, Math.max(...mesesArr.map(e=>e[1]),1))}
-    </div>`;
-  $('relatorioOverlay').classList.add('open');
-}
-
-function fecharRelatorio() { $('relatorioOverlay').classList.remove('open'); }
-
-// ══════════════════════════════════════════════════════════
-// R25 — DASHBOARD DO SUPERVISOR
-// ══════════════════════════════════════════════════════════
-function abrirDashboard() {
-  const lista = pacientesCache || [];
-  const total   = lista.length;
-  const conc    = lista.filter(p => p.status === 'Concluído').length;
-  const andamento = lista.filter(p => p.status !== 'Concluído').length;
-  const agora   = new Date();
-  const DIAS30  = lista.filter(p => {
-    if (!p.dataEdicao) return false;
-    const dt = p.dataEdicao.toDate ? p.dataEdicao.toDate() : new Date(p.dataEdicao);
-    return (agora - dt) / (1000*60*60*24) >= 30;
-  }).length;
-
-  const toMap = (fn) => {
-    const m = {};
-    lista.forEach(p => { const k = fn(p); if(k) m[k]=(m[k]||0)+1; });
-    return Object.entries(m).sort((a,b)=>b[1]-a[1]);
-  };
-
-  const sexos     = toMap(p => p.sexo || 'Não informado');
-  const convenios = toMap(p => p.convenio || 'Não informado').slice(0,5);
-  const queixas   = toMap(p => p.queixa ? p.queixa.trim().split(/[.,\n]/)[0].slice(0,35) : null).slice(0,5);
-
-  // Últimos pacientes editados
-  const recentes = [...lista].sort((a,b) => {
-    const da = a.dataEdicao?(a.dataEdicao.toDate?a.dataEdicao.toDate():new Date(a.dataEdicao)):0;
-    const db2= b.dataEdicao?(b.dataEdicao.toDate?b.dataEdicao.toDate():new Date(b.dataEdicao)):0;
-    return db2-da;
-  }).slice(0,6);
-
-  const barras = (items, cor='blue') => {
-    const max = items[0]?.[1] || 1;
-    return items.map(([lbl,n]) =>
-      `<div class="dash-bar-row">
-        <div class="dash-bar-label" title="${lbl}">${lbl}</div>
-        <div class="dash-bar-track"><div class="dash-bar-fill ${cor}" style="width:${Math.round((n/max)*100)}%"></div></div>
-        <div class="dash-bar-count">${n}</div>
-      </div>`).join('');
-  };
-
-  $('dashboardBody').innerHTML = `
-    <div class="dash-kpi-row">
-      <div class="dash-kpi"><div class="dash-kpi-val">${total}</div><div class="dash-kpi-lbl">Total pacientes</div></div>
-      <div class="dash-kpi"><div class="dash-kpi-val">${conc}</div><div class="dash-kpi-lbl">Concluídos</div></div>
-      <div class="dash-kpi"><div class="dash-kpi-val">${andamento}</div><div class="dash-kpi-lbl">Em andamento</div></div>
-      <div class="dash-kpi"><div class="dash-kpi-val" style="color:var(--amber)">${DIAS30}</div><div class="dash-kpi-lbl">Sem atualização +30d</div></div>
-    </div>
-    <div class="dash-grid-2">
-      <div class="dash-section">
-        <div class="dash-section-title">Sexo</div>
-        ${barras(sexos,'blue')}
-      </div>
-      <div class="dash-section">
-        <div class="dash-section-title">Convênio</div>
-        ${barras(convenios,'green')}
-      </div>
-    </div>
-    ${queixas.length ? `<div class="dash-section">
-      <div class="dash-section-title">Queixas mais frequentes</div>
-      ${barras(queixas,'pink')}
-    </div>` : ''}
-    <div class="dash-section">
-      <div class="dash-section-title">Últimas fichas atualizadas</div>
-      <table class="dash-table">
-        <thead><tr><th>Paciente</th><th>Status</th><th>Última edição</th></tr></thead>
-        <tbody>${recentes.map(p => {
-          const dt = p.dataEdicao?(p.dataEdicao.toDate?p.dataEdicao.toDate():new Date(p.dataEdicao)).toLocaleDateString('pt-BR'):'—';
-          return `<tr><td>${p.nome||'—'}</td><td>${p.status||'—'}</td><td>${dt}</td></tr>`;
-        }).join('')}</tbody>
-      </table>
-    </div>`;
-  $('dashboardOverlay').classList.add('open');
-}
-function fecharDashboard() { $('dashboardOverlay').classList.remove('open'); }
-
-// ══════════════════════════════════════════════════════════
-// R21 — AGENDA DE SESSÕES
-// ══════════════════════════════════════════════════════════
-let agendaAgendamentos = JSON.parse(localStorage.getItem('fonoAgenda') || '[]');
-let agendaAnoAtual = new Date().getFullYear();
-let agendaMesAtual = new Date().getMonth();
-let agendaDiaSel  = new Date().toISOString().slice(0,10);
-
-function salvarAgenda() {
-  try { localStorage.setItem('fonoAgenda', JSON.stringify(agendaAgendamentos)); } catch(e) {}
-}
-
-function abrirAgenda() {
-  $('viewTabela').style.display    = 'none';
-  $('viewFormulario').style.display = 'none';
-  $('viewAgenda').style.display    = 'block';
-  $('tituloPag').innerText = 'Agenda de Sessões';
-  $('btnNovo').style.display = 'none';
-  // Popular select de pacientes
-  const sel = $('agendaPaciente');
-  sel.innerHTML = '<option value="">Selecione o paciente...</option>';
-  (pacientesCache||[]).forEach(p => {
-    const op = document.createElement('option');
-    op.value = p.firestoreId; op.textContent = p.nome||'—';
-    sel.appendChild(op);
-  });
-  // Data padrão = hoje
-  $('agendaData').value = agendaDiaSel;
-  agendaAnoAtual = new Date().getFullYear();
-  agendaMesAtual = new Date().getMonth();
-  agendaRenderCal();
-  agendaRenderLista(agendaDiaSel);
-}
-
-function agendaMesAnterior() {
-  agendaMesAtual--;
-  if (agendaMesAtual < 0) { agendaMesAtual = 11; agendaAnoAtual--; }
-  agendaRenderCal();
-}
-function agendaProxMes() {
-  agendaMesAtual++;
-  if (agendaMesAtual > 11) { agendaMesAtual = 0; agendaAnoAtual++; }
-  agendaRenderCal();
-}
-
-function agendaRenderCal() {
-  const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-  const DIAS  = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-  $('agendaMesLabel').textContent = `${MESES[agendaMesAtual]} ${agendaAnoAtual}`;
-
-  const grid = $('agendaCalGrid');
-  grid.innerHTML = '';
-
-  // Cabeçalho dias da semana
-  DIAS.forEach(d => {
-    const el = document.createElement('div');
-    el.className = 'agenda-cal-dow'; el.textContent = d;
-    grid.appendChild(el);
-  });
-
-  const hoje = new Date().toISOString().slice(0,10);
-  const primeiroDia = new Date(agendaAnoAtual, agendaMesAtual, 1);
-  const ultimoDia  = new Date(agendaAnoAtual, agendaMesAtual+1, 0);
-  let startDow = primeiroDia.getDay();
-
-  // Dias do mês anterior
-  for (let i=0; i<startDow; i++) {
-    const d = new Date(agendaAnoAtual, agendaMesAtual, -startDow+i+1);
-    const el = document.createElement('div');
-    el.className = 'agenda-cal-day outro-mes';
-    el.innerHTML = `<div class="agenda-day-num">${d.getDate()}</div>`;
-    grid.appendChild(el);
-  }
-
-  // Dias do mês atual
-  for (let dia=1; dia<=ultimoDia.getDate(); dia++) {
-    const dateStr = `${agendaAnoAtual}-${String(agendaMesAtual+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
-    const eventos = agendaAgendamentos.filter(a => a.data === dateStr);
-    const el = document.createElement('div');
-    el.className = 'agenda-cal-day' + (dateStr===hoje?' hoje':'') + (dateStr===agendaDiaSel?' selecionado':'');
-    el.innerHTML = `<div class="agenda-day-num">${dia}</div>` +
-      eventos.slice(0,2).map(e => {
-        const pac = (pacientesCache||[]).find(p=>p.firestoreId===e.pacienteId);
-        return `<div class="agenda-day-evento${e.concluido?' concluido':''}">${pac?.nome?.split(' ')[0]||'Sessão'}</div>`;
-      }).join('') +
-      (eventos.length>2?`<div class="agenda-day-evento">+${eventos.length-2}</div>`:'');
-    el.onclick = () => {
-      agendaDiaSel = dateStr;
-      $('agendaData').value = dateStr;
-      agendaRenderCal();
-      agendaRenderLista(dateStr);
-    };
-    grid.appendChild(el);
-  }
-
-  // Completar última linha
-  const totalCells = startDow + ultimoDia.getDate();
-  const resto = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
-  for (let i=1; i<=resto; i++) {
-    const el = document.createElement('div');
-    el.className = 'agenda-cal-day outro-mes';
-    el.innerHTML = `<div class="agenda-day-num">${i}</div>`;
-    grid.appendChild(el);
+// ── Agenda ──
+let agendaAgendamentos=JSON.parse(localStorage.getItem('fonoAgenda')||'[]');
+let agendaAno=new Date().getFullYear(),agendaMes=new Date().getMonth(),agendaDiaSel=new Date().toISOString().slice(0,10);
+function salvarAgenda(){try{localStorage.setItem('fonoAgenda',JSON.stringify(agendaAgendamentos));}catch(e){}}
+window.abrirAgenda=function(){
+  $('viewTabela').style.display='none';$('viewFormulario').style.display='none';$('viewAgenda').style.display='block';
+  $('tituloPag').innerText='Agenda de Sessões';$('btnNovo').style.display='none';
+  const sel=$('agendaPaciente');sel.innerHTML='<option value="">Selecione...</option>';
+  (pacientesCache||[]).forEach(p=>{const op=document.createElement('option');op.value=p.firestoreId;op.textContent=p.nome||'—';sel.appendChild(op);});
+  $('agendaData').value=agendaDiaSel;agendaAno=new Date().getFullYear();agendaMes=new Date().getMonth();agendaRenderCal();agendaRenderLista(agendaDiaSel);
+};
+function agendaRenderCal(){
+  const MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  $('agendaMesLabel').textContent=`${MESES[agendaMes]} ${agendaAno}`;
+  const grid=$('agendaGrid');grid.innerHTML='';
+  ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'].forEach(d=>{const el=document.createElement('div');el.className='agenda-dow';el.textContent=d;grid.appendChild(el);});
+  const hoje=new Date().toISOString().slice(0,10),primDia=new Date(agendaAno,agendaMes,1),ultDia=new Date(agendaAno,agendaMes+1,0);
+  for(let i=0;i<primDia.getDay();i++){const el=document.createElement('div');el.className='agenda-day outro-mes';grid.appendChild(el);}
+  for(let d=1;d<=ultDia.getDate();d++){
+    const ds=`${agendaAno}-${String(agendaMes+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const evs=agendaAgendamentos.filter(a=>a.data===ds);
+    const el=document.createElement('div');el.className='agenda-day'+(ds===hoje?' hoje':'')+(ds===agendaDiaSel?' selecionado':'');
+    el.innerHTML=`<div class="agenda-day-num">${d}</div>`+evs.slice(0,2).map(e=>{const p=(pacientesCache||[]).find(p=>p.firestoreId===e.pacienteId);return`<div class="agenda-evento-pill">${p?.nome?.split(' ')[0]||'Sessão'}</div>`;}).join('');
+    el.onclick=()=>{agendaDiaSel=ds;$('agendaData').value=ds;agendaRenderCal();agendaRenderLista(ds);};grid.appendChild(el);
   }
 }
-
-function agendaRenderLista(dateStr) {
-  const MESES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-  const [ano,mes,dia] = dateStr.split('-');
-  $('agendaListaTitulo').textContent = `Sessões — ${dia} ${MESES[parseInt(mes)-1]} ${ano}`;
-  const container = $('agendaListaItens');
-  container.innerHTML = '';
-  const eventos = agendaAgendamentos.filter(a => a.data === dateStr).sort((a,b)=>a.hora.localeCompare(b.hora));
-  if (!eventos.length) {
-    container.innerHTML = '<div class="agenda-vazio">Nenhuma sessão neste dia.</div>';
-    return;
-  }
-  eventos.forEach(ev => {
-    const pac = (pacientesCache||[]).find(p=>p.firestoreId===ev.pacienteId);
-    const div = document.createElement('div');
-    div.className = 'agenda-evento-item' + (ev.concluido?' concluido':'');
-    div.innerHTML = `
-      <div class="agenda-evento-hora">${ev.hora}</div>
-      <div class="agenda-evento-info">
-        <div class="agenda-evento-pac">${esc(pac?.nome||'Paciente')}</div>
-        <div class="agenda-evento-tipo">${esc(ev.tipo)}${ev.obs?` · ${esc(ev.obs.slice(0,40))}`:''}
-        </div>
-      </div>
-      <div class="agenda-evento-btns">
-        <button class="btn-ev-ok" title="Google Calendar" onclick="agendaAbrirGoogleCal(agendaAgendamentos.find(a=>a.id==='${ev.id}'),(pacientesCache||[]).find(p=>p.firestoreId==='${ev.pacienteId}'))" style="font-size:14px;">📅</button>
-        <button class="btn-ev-ok" title="${ev.concluido?'Reabrir':'Concluir'}" onclick="agendaToggleConcluido('${ev.id}')">${ev.concluido?'↩':'✓'}</button>
-        <button class="btn-ev-del" title="Excluir" onclick="agendaExcluir('${ev.id}')">🗑</button>
-      </div>`;
-    container.appendChild(div);
-  });
+function agendaRenderLista(ds){
+  const[ano,mes,dia]=ds.split('-');const MESES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  $('agendaListaTitulo').textContent=`Sessões — ${dia} ${MESES[parseInt(mes)-1]}`;
+  const cont=$('agendaListaItens');cont.innerHTML='';
+  const evs=agendaAgendamentos.filter(a=>a.data===ds).sort((a,b)=>a.hora.localeCompare(b.hora));
+  if(!evs.length){cont.innerHTML='<div style="text-align:center;color:var(--txt3);font-size:13px;padding:16px;">Nenhuma sessão.</div>';return;}
+  evs.forEach(ev=>{const pac=(pacientesCache||[]).find(p=>p.firestoreId===ev.pacienteId);const div=document.createElement('div');div.className='agenda-evento-item'+(ev.concluido?' concluido':'');div.innerHTML=`<div class="agenda-evento-hora">${ev.hora}</div><div style="flex:1;"><div class="agenda-evento-pac">${pac?.nome||'—'}</div><div class="agenda-evento-tipo">${ev.tipo}</div></div><div style="display:flex;gap:4px;"><button class="btn-ev" onclick="window.agendaGCal('${ev.id}')">📅</button><button class="btn-ev" onclick="window.agendaConcluir('${ev.id}')">${ev.concluido?'↩':'✓'}</button><button class="btn-ev" onclick="window.agendaExcluir('${ev.id}')">🗑</button></div>`;cont.appendChild(div);});
 }
+window.salvarAgendamento=function(){
+  const pacId=$('agendaPaciente').value,data=$('agendaData').value,hora=$('agendaHora').value,tipo=$('agendaTipo').value,obs=$('agendaObs').value.trim();
+  if(!pacId){toast('⚠️ Selecione um paciente.',true);return;}if(!data){toast('⚠️ Selecione uma data.',true);return;}
+  agendaAgendamentos.push({id:Date.now().toString(),pacienteId:pacId,data,hora,tipo,obs,concluido:false});salvarAgenda();
+  agendaDiaSel=data;const[a,m]=data.split('-');agendaAno=parseInt(a);agendaMes=parseInt(m)-1;agendaRenderCal();agendaRenderLista(data);
+  $('agendaPaciente').value='';$('agendaObs').value='';toast('✅ Sessão agendada!');
+};
+window.agendaMesAnterior=function(){agendaMes--;if(agendaMes<0){agendaMes=11;agendaAno--;}agendaRenderCal();};
+window.agendaProxMes=function(){agendaMes++;if(agendaMes>11){agendaMes=0;agendaAno++;}agendaRenderCal();};
+window.agendaConcluir=function(id){const ev=agendaAgendamentos.find(a=>a.id===id);if(ev){ev.concluido=!ev.concluido;salvarAgenda();agendaRenderCal();agendaRenderLista(agendaDiaSel);}};
+window.agendaExcluir=function(id){if(!confirm('Excluir?'))return;agendaAgendamentos=agendaAgendamentos.filter(a=>a.id!==id);salvarAgenda();agendaRenderCal();agendaRenderLista(agendaDiaSel);toast('🗑 Removido.');};
+window.agendaGCal=function(id){const ev=agendaAgendamentos.find(a=>a.id===id);if(!ev)return;const pac=(pacientesCache||[]).find(p=>p.firestoreId===ev.pacienteId);const titulo=encodeURIComponent(`${ev.tipo} — ${pac?.nome||'Paciente'}`);const[a,m,d]=ev.data.split('-');const[h,mi]=ev.hora.split(':');const inicio=`${a}${m}${d}T${h}${mi}00`;const fim=new Date(parseInt(a),parseInt(m)-1,parseInt(d),parseInt(h),parseInt(mi)+50);const fimStr=`${fim.getFullYear()}${String(fim.getMonth()+1).padStart(2,'0')}${String(fim.getDate()).padStart(2,'0')}T${String(fim.getHours()).padStart(2,'0')}${String(fim.getMinutes()).padStart(2,'0')}00`;window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${inicio}/${fimStr}`,'_blank');};
 
-function salvarAgendamento() {
-  const pacId = $('agendaPaciente').value;
-  const data  = $('agendaData').value;
-  const hora  = $('agendaHora').value;
-  const tipo  = $('agendaTipo').value;
-  const obs   = $('agendaObs').value.trim();
-  if (!pacId) { toast('⚠️ Selecione um paciente.', true); return; }
-  if (!data)  { toast('⚠️ Selecione uma data.', true); return; }
-  if (!hora)  { toast('⚠️ Informe o horário.', true); return; }
-  const novo = { id: Date.now().toString(), pacienteId: pacId, data, hora, tipo, obs, concluido: false, criadoEm: new Date().toISOString() };
-  agendaAgendamentos.push(novo);
-  salvarAgenda();
-  agendaDiaSel = data;
-  const [ano,mes] = data.split('-');
-  agendaAnoAtual = parseInt(ano); agendaMesAtual = parseInt(mes)-1;
-  agendaRenderCal();
-  agendaRenderLista(data);
-  $('agendaPaciente').value = ''; $('agendaObs').value = '';
-  // R28 — Oferecer adição ao Google Calendar
-  const pac = (pacientesCache||[]).find(p=>p.firestoreId===pacId);
-  agendaAbrirGoogleCal(novo, pac);
-  toast('✅ Sessão agendada!');
-}
+// ── Botões via addEventListener (dentro do módulo) ──
+document.addEventListener('DOMContentLoaded',()=>{
+  if($('btnRelatorio'))$('btnRelatorio').addEventListener('click',()=>window.abrirRelatorio());
+  if($('btnSupervisor'))$('btnSupervisor').addEventListener('click',()=>window.abrirDashboard());
+  if($('btnAgendar'))$('btnAgendar').addEventListener('click',()=>window.salvarAgendamento());
+  if($('btnAgendaAnterior'))$('btnAgendaAnterior').addEventListener('click',()=>window.agendaMesAnterior());
+  if($('btnAgendaProx'))$('btnAgendaProx').addEventListener('click',()=>window.agendaProxMes());
+  if($('btnMGrafico'))$('btnMGrafico').addEventListener('click',()=>{const p=pacSel;closeModal('overlayOpcoes');setTimeout(()=>window.abrirGraficoEvolucao(p),150);});
+});
 
-// R28 — Gerar link do Google Calendar
-function agendaAbrirGoogleCal(ev, pac) {
-  const nome = pac?.nome || 'Paciente';
-  const titulo = encodeURIComponent(`${ev.tipo} — ${nome}`);
-  const desc   = encodeURIComponent(`Tipo: ${ev.tipo}\nPaciente: ${nome}${ev.obs?'\nObs: '+ev.obs:''}\n\nFono Facilita`);
-
-  // Formatar data/hora para o formato do Google Calendar: YYYYMMDDTHHMMSS
-  const [ano,mes,dia] = ev.data.split('-');
-  const [hora,min]    = ev.hora.split(':');
-  const inicio = `${ano}${mes}${dia}T${hora}${min}00`;
-  // Duração padrão de 50 minutos
-  const fimDate = new Date(parseInt(ano), parseInt(mes)-1, parseInt(dia), parseInt(hora), parseInt(min)+50);
-  const fimAno  = fimDate.getFullYear();
-  const fimMes  = String(fimDate.getMonth()+1).padStart(2,'0');
-  const fimDia  = String(fimDate.getDate()).padStart(2,'0');
-  const fimHora = String(fimDate.getHours()).padStart(2,'0');
-  const fimMin  = String(fimDate.getMinutes()).padStart(2,'0');
-  const fim = `${fimAno}${fimMes}${fimDia}T${fimHora}${fimMin}00`;
-
-  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${inicio}/${fim}&details=${desc}`;
-
-  if (confirm('Deseja adicionar esta sessão ao Google Calendar?')) {
-    window.open(url, '_blank');
-  }
-}
-
-function agendaToggleConcluido(id) {
-  const ev = agendaAgendamentos.find(a=>a.id===id);
-  if (ev) { ev.concluido = !ev.concluido; salvarAgenda(); agendaRenderCal(); agendaRenderLista(agendaDiaSel); }
-}
-
-function agendaExcluir(id) {
-  if (!confirm('Excluir este agendamento?')) return;
-  agendaAgendamentos = agendaAgendamentos.filter(a=>a.id!==id);
-  salvarAgenda(); agendaRenderCal(); agendaRenderLista(agendaDiaSel);
-  toast('🗑 Agendamento removido.');
-}
-
-// ══════════════════════════════════════════════════════════
-// R22 — GRÁFICO DE EVOLUÇÃO DAS PONTUAÇÕES
-// ══════════════════════════════════════════════════════════
-let _chartPac = null;
-const CHART_SERIES = [
-  { key:'procTotGeral', label:'PROC Total', color:'#4f6ef7' },
-  { key:'procTotHab',   label:'PROC Habilidades', color:'#34d399' },
-  { key:'procTotComp',  label:'PROC Compreensão', color:'#f472b6' },
-  { key:'procTotCog',   label:'PROC Cognitivo', color:'#fbbf24' },
-  { key:'tvipEscore',   label:'TVIP Escore', color:'#a78bfa' },
-  { key:'amiofeEscore', label:'AMIOFE Escore', color:'#fb923c' },
-  { key:'mbgrEscore',   label:'MBGR Escore', color:'#38bdf8' },
-];
-let _chartSerieAtiva = 'procTotGeral';
-
-function abrirGraficoEvolucao(pac) {
-  _chartPac = pac;
-  _chartSerieAtiva = 'procTotGeral';
-
-  // Monta selector de séries
-  const sel = $('chartSelector');
-  sel.innerHTML = '';
-  CHART_SERIES.forEach(s => {
-    const btn = document.createElement('button');
-    btn.className = 'evolucao-chart-tab' + (s.key === _chartSerieAtiva ? ' ativa' : '');
-    btn.textContent = s.label;
-    btn.onclick = () => {
-      _chartSerieAtiva = s.key;
-      sel.querySelectorAll('.evolucao-chart-tab').forEach(b => b.classList.remove('ativa'));
-      btn.classList.add('ativa');
-      desenharGrafico();
-    };
-    sel.appendChild(btn);
-  });
-
-  $('evolucaoChartOverlay').classList.add('open');
-  desenharGrafico();
-}
-
-function fecharGraficoEvolucao() { $('evolucaoChartOverlay').classList.remove('open'); }
-
-function desenharGrafico() {
-  const canvas = $('evolucaoCanvas');
-  const empty  = $('evolucaoChartEmpty');
-  const legend = $('chartLegend');
-  const pac    = _chartPac;
-  const serie  = CHART_SERIES.find(s => s.key === _chartSerieAtiva);
-
-  // Coleta pontos: evoluções salvas com o campo de pontuação
-  const evols = (pac.evolucao || []).filter(ev => ev[serie.key] !== undefined && ev[serie.key] !== '');
-  // Também inclui o valor atual salvo no paciente
-  const pontos = [];
-  if (evols.length === 0 && !pac[serie.key]) {
-    canvas.style.display = 'none'; empty.style.display = 'flex';
-    legend.innerHTML = '';
-    return;
-  }
-  canvas.style.display = 'block'; empty.style.display = 'none';
-
-  // Monta array de {label, val}
-  evols.forEach((ev, i) => {
-    const v = parseFloat(ev[serie.key]);
-    if (!isNaN(v)) pontos.push({ label: ev.data || `Sessão ${i+1}`, val: v });
-  });
-  if (pac[serie.key] && pontos.length === 0) {
-    pontos.push({ label: 'Atual', val: parseFloat(pac[serie.key]) });
-  }
-
-  if (pontos.length < 1) { canvas.style.display='none'; empty.style.display='flex'; return; }
-
-  // Desenha
-  const ctx = canvas.getContext('2d');
-  const W = canvas.offsetWidth; const H = canvas.offsetHeight;
-  canvas.width = W; canvas.height = H;
-  ctx.clearRect(0,0,W,H);
-
-  const PAD = { top:20, right:20, bottom:40, left:44 };
-  const chartW = W - PAD.left - PAD.right;
-  const chartH = H - PAD.top  - PAD.bottom;
-  const vals = pontos.map(p=>p.val);
-  const minV = Math.max(0, Math.min(...vals) - 5);
-  const maxV = Math.max(...vals) + 5;
-
-  // Grid lines
-  ctx.strokeStyle = 'rgba(36,48,80,.8)'; ctx.lineWidth = 1;
-  for (let i=0;i<=4;i++) {
-    const yPos = PAD.top + (chartH / 4) * i;
-    ctx.beginPath(); ctx.moveTo(PAD.left, yPos); ctx.lineTo(PAD.left+chartW, yPos); ctx.stroke();
-    const lbl = Math.round(maxV - ((maxV-minV)/4)*i);
-    ctx.fillStyle='rgba(78,96,125,.8)'; ctx.font='10px DM Sans,sans-serif';
-    ctx.textAlign='right'; ctx.fillText(lbl, PAD.left-6, yPos+4);
-  }
-
-  // X labels
-  ctx.textAlign='center'; ctx.fillStyle='rgba(78,96,125,.9)'; ctx.font='10px DM Sans,sans-serif';
-  pontos.forEach((p,i) => {
-    const xPos = PAD.left + (i/(Math.max(pontos.length-1,1)))*chartW;
-    ctx.fillText(p.label.slice(0,8), xPos, H-PAD.bottom+16);
-  });
-
-  // Area fill
-  const grad = ctx.createLinearGradient(0,PAD.top,0,PAD.top+chartH);
-  grad.addColorStop(0, serie.color+'44');
-  grad.addColorStop(1, serie.color+'05');
-  ctx.beginPath();
-  pontos.forEach((p,i) => {
-    const x = PAD.left + (i/(Math.max(pontos.length-1,1)))*chartW;
-    const y = PAD.top + chartH - ((p.val-minV)/(maxV-minV||1))*chartH;
-    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-  });
-  ctx.lineTo(PAD.left+(pontos.length-1)/(Math.max(pontos.length-1,1))*chartW, PAD.top+chartH);
-  ctx.lineTo(PAD.left, PAD.top+chartH);
-  ctx.closePath(); ctx.fillStyle=grad; ctx.fill();
-
-  // Line
-  ctx.beginPath(); ctx.strokeStyle=serie.color; ctx.lineWidth=2.5; ctx.lineJoin='round';
-  pontos.forEach((p,i) => {
-    const x = PAD.left + (i/(Math.max(pontos.length-1,1)))*chartW;
-    const y = PAD.top + chartH - ((p.val-minV)/(maxV-minV||1))*chartH;
-    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-  });
-  ctx.stroke();
-
-  // Dots + values
-  pontos.forEach((p,i) => {
-    const x = PAD.left + (i/(Math.max(pontos.length-1,1)))*chartW;
-    const y = PAD.top + chartH - ((p.val-minV)/(maxV-minV||1))*chartH;
-    ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2);
-    ctx.fillStyle=serie.color; ctx.fill();
-    ctx.strokeStyle='#0d1220'; ctx.lineWidth=2; ctx.stroke();
-    ctx.fillStyle=serie.color; ctx.font='bold 10px DM Sans,sans-serif';
-    ctx.textAlign='center'; ctx.fillText(p.val, x, y-10);
-  });
-
-  // Legend
-  legend.innerHTML = `<div class="evolucao-chart-legend-item">
-    <div class="evolucao-chart-legend-dot" style="background:${serie.color}"></div>
-    <span>${serie.label} — ${pontos.length} ponto(s) registrado(s)</span>
-  </div>`;
-}
-
-// ══════════════════════════════════════════════════════════
-// R24 — ENVIAR FICHA PARA SUPERVISÃO
-// ══════════════════════════════════════════════════════════
-let _pacSupervisao = null;
-function abrirSupervisao() {
-  const editId = $('formAnamnese').getAttribute('data-edit-id');
-  _pacSupervisao = editId ? pacientesCache.find(p => p.firestoreId === editId) : null;
-  if (!_pacSupervisao) { toast('⚠️ Salve a ficha antes de enviar para supervisão.', true); return; }
-
-  const p = _pacSupervisao;
-  $('supervisaoResumo').innerHTML = `
-    <strong>Paciente:</strong> ${p.nome||'—'}<br>
-    <strong>Idade:</strong> ${p.idade||'—'} &nbsp;|&nbsp; <strong>Sexo:</strong> ${p.sexo||'—'}<br>
-    <strong>Queixa:</strong> ${p.queixa ? p.queixa.slice(0,80)+(p.queixa.length>80?'…':'') : '—'}<br>
-    <strong>Status:</strong> ${p.status||'—'}`;
-  $('supervisaoEmail').value = '';
-  $('supervisaoObs').value = '';
-  $('supervisaoOverlay').classList.add('open');
-}
-function fecharSupervisao() { $('supervisaoOverlay').classList.remove('open'); }
-
-function enviarSupervisao() {
-  const email = $('supervisaoEmail').value.trim();
-  if (!email || !email.includes('@')) { toast('⚠️ Informe um e-mail válido do supervisor.', true); return; }
-  const p   = _pacSupervisao;
-  const obs = $('supervisaoObs').value.trim();
-  const aluno = auth.currentUser?.displayName || auth.currentUser?.email || 'Aluno';
-
-  const assunto = encodeURIComponent(`[Fono Facilita] Ficha para supervisão — ${p.nome||'Paciente'}`);
-  const corpo = encodeURIComponent(
-    `Olá,\n\nO aluno(a) ${aluno} enviou a ficha do paciente abaixo para sua revisão:\n\n` +
-    `Paciente: ${p.nome||'—'}\nIdade: ${p.idade||'—'}\nSexo: ${p.sexo||'—'}\n` +
-    `Queixa principal: ${p.queixa||'—'}\nStatus: ${p.status||'—'}\n` +
-    `Última atualização: ${p.dataEdicao?(p.dataEdicao.toDate?p.dataEdicao.toDate():new Date(p.dataEdicao)).toLocaleDateString('pt-BR'):'—'}\n\n` +
-    (obs ? `Observações do aluno:\n${obs}\n\n` : '') +
-    `Acesse o sistema para visualizar a ficha completa.\n\nFono Facilita`
-  );
-
-  window.open(`mailto:${email}?subject=${assunto}&body=${corpo}`);
-  fecharSupervisao();
-  toast('📨 E-mail de supervisão aberto!');
-}
-
-function exportarRelatorioCSV() {
-  const lista = pacientesCache || [];
-  const linhas = [['Nome','Sexo','Status','Convênio','1ª Consulta','Última Edição']];
-  lista.forEach(p => {
-    const dtC = p.dataCriacao?(p.dataCriacao.toDate?p.dataCriacao.toDate():new Date(p.dataCriacao)).toLocaleDateString('pt-BR'):'—';
-    const dtE = p.dataEdicao?(p.dataEdicao.toDate?p.dataEdicao.toDate():new Date(p.dataEdicao)).toLocaleDateString('pt-BR'):'—';
-    linhas.push([p.nome||'—',p.sexo||'—',p.status||'—',p.convenio||'—',dtC,dtE]);
-  });
-  const csv = linhas.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));
-  a.download = `Relatorio_FonoFacilita_${new Date().toLocaleDateString('pt-BR').replace(/\//g,'-')}.csv`;
-  a.click();
-}
+// ── Notificações integradas ao renderStats ──
+const _origRenderStats = renderStats;
+window.renderStats = function(l) { _origRenderStats(l); verificarNotificacoes(l); };
+renderStats = window.renderStats;
 </script>
+
+<!-- Modal Relatório -->
+<div class="modal-overlay-new" id="modalRelatorio" onclick="if(event.target===this)window.fecharRelatorio()">
+  <div class="modal-box-new">
+    <div class="modal-head-new"><h2>📊 Relatório Estatístico</h2><button class="btn-modal-close" onclick="window.fecharRelatorio()">✕</button></div>
+    <div class="modal-body-new" id="relatorioBody"></div>
+    <div class="modal-foot-new">
+      <button class="btn-modal-close" onclick="window.fecharRelatorio()">Fechar</button>
+      <button class="btn-modal-action" onclick="window.exportarRelatorioCSV()">⬇️ Exportar CSV</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Dashboard Supervisor -->
+<div class="modal-overlay-new" id="modalDashboard" onclick="if(event.target===this)window.fecharDashboard()">
+  <div class="modal-box-new" style="max-width:780px;">
+    <div class="modal-head-new"><h2>👑 Dashboard do Supervisor</h2><button class="btn-modal-close" onclick="window.fecharDashboard()">✕</button></div>
+    <div class="modal-body-new" id="dashboardBody"></div>
+  </div>
+</div>
+
+<!-- Modal Enviar Supervisão -->
+<div class="modal-overlay-new" id="modalSupervisao" onclick="if(event.target===this)window.fecharSupervisao()">
+  <div class="modal-box-new" style="max-width:520px;">
+    <div class="modal-head-new"><h2 style="color:var(--purple);">👑 Enviar para Supervisão</h2><button class="btn-modal-close" onclick="window.fecharSupervisao()">✕</button></div>
+    <div class="modal-body-new">
+      <div class="supervisao-resumo" id="supervisaoResumo"></div>
+      <div class="fgrp"><label>E-mail do supervisor</label><input type="email" id="supervisaoEmail" placeholder="supervisor@universidade.edu.br"></div>
+      <div class="fgrp"><label>Observação (opcional)</label><textarea id="supervisaoObs" style="min-height:80px;" placeholder="Dúvidas ou pontos para revisão..."></textarea></div>
+    </div>
+    <div class="modal-foot-new">
+      <button class="btn-modal-close" onclick="window.fecharSupervisao()">Cancelar</button>
+      <button class="btn-modal-action" style="background:linear-gradient(135deg,var(--purple),#6d28d9);" onclick="window.enviarSupervisao()">📨 Enviar por E-mail</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Gráfico Evolução -->
+<div class="modal-overlay-new" id="modalGrafico" onclick="if(event.target===this)window.fecharGraficoEvolucao()">
+  <div class="modal-box-new" style="max-width:680px;">
+    <div class="modal-head-new"><h2>📈 Evolução do Paciente</h2><button class="btn-modal-close" onclick="window.fecharGraficoEvolucao()">✕</button></div>
+    <div class="modal-body-new">
+      <div class="chart-selector" id="chartSelector"></div>
+      <div class="chart-wrap"><canvas id="evolucaoCanvas" style="width:100%;height:100%;display:block;"></canvas></div>
+      <div id="chartLegend" style="margin-top:10px;font-size:12px;color:var(--txt2);"></div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
