@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fono Facilita v19 — Fonoaudiologia</title>
+<title>Fono Facilita v20 — Fonoaudiologia</title>
 <!-- preconnect acelera DNS/TLS antecipadamente -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -942,7 +942,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <p class="bv-sub" id="bvSub">Sistema Fonoaudiológico · Anamnese</p>
     <div class="bv-badge">
       <div class="bv-badge-dot"></div>
-      v19.0 · Sistema Online
+      v20.0 · Sistema Online
     </div>
     <div class="bv-hint"><div class="bv-hint-dot"></div>Clique para entrar</div>
   </div>
@@ -1031,7 +1031,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div style="text-align:center;margin-top:18px;">
       <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--txt3);background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:4px 12px;">
         <span style="width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(52,211,153,.6);display:inline-block;"></span>
-        v19.0 · Fono Facilita
+        v20.0 · Fono Facilita
       </span>
     </div>
   </div>
@@ -2741,15 +2741,6 @@ onAuthStateChanged(auth, async user => {
   window._bvOnConcluir(async () => {
     document.getElementById('loadingOverlay').style.display = 'none';
     if (user) {
-      // R35 — Bloquear acesso se e-mail não verificado
-      if (!user.emailVerified) {
-        await signOut(auth);
-        mostrarLogin();
-        setTimeout(() => {
-          $('erroAuth').innerText = '📧 Confirme seu e-mail antes de entrar. Verifique sua caixa de entrada.';
-        }, 100);
-        return;
-      }
       $('telaAuth').style.display    = 'none';
       $('telaSistema').style.display = 'grid';
       $('nomeExib').innerText    = user.displayName || user.email.split('@')[0];
@@ -2788,11 +2779,7 @@ async function acaoAuth() {
       if (senha !== senha2)  { $('erroAuth').innerText = '⚠️ As senhas não conferem.'; throw null; }
       const cred = await createUserWithEmailAndPassword(auth, email, senha);
       if (nome) await updateProfile(cred.user, { displayName: nome });
-      // R35 — Enviar e-mail de verificação
-      await cred.user.sendEmailVerification();
-      await signOut(auth);
-      $('okAuth').innerText = '✅ Conta criada! Verifique seu e-mail para ativar o acesso.';
-      trocarAbaAuth('login');
+      $('okAuth').innerText = '✅ Conta criada com sucesso!';
     } else {
       await signInWithEmailAndPassword(auth, email, senha);
     }
