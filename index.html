@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fono Facilita v15 — Fonoaudiologia</title>
+<title>Fono Facilita v19 — Fonoaudiologia</title>
 <!-- preconnect acelera DNS/TLS antecipadamente -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -206,6 +206,62 @@ textarea{resize:vertical;min-height:78px;line-height:1.55;}
   background:linear-gradient(135deg,var(--purple),#6d28d9);color:#fff;transition:.2s;
 }
 .btn-supv-send:hover{opacity:.88;}
+
+/* ── R21 — AGENDA ── */
+#viewAgenda{display:none;animation:fadeUp .28s ease both;}
+.agenda-wrap{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start;}
+@media(max-width:900px){.agenda-wrap{grid-template-columns:1fr;}}
+.agenda-cal{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;}
+.agenda-cal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1.5px solid var(--border);}
+.agenda-cal-head h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;}
+.agenda-cal-nav{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:18px;padding:4px 8px;border-radius:6px;transition:.15s;}
+.agenda-cal-nav:hover{background:var(--bg3);color:var(--txt1);}
+.agenda-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);}
+.agenda-cal-dow{background:var(--bg1);padding:8px 4px;text-align:center;font-size:10.5px;font-weight:700;color:var(--txt3);text-transform:uppercase;}
+.agenda-cal-day{
+  background:var(--bg2);padding:8px 6px;min-height:64px;cursor:pointer;
+  transition:background .15s;position:relative;
+}
+.agenda-cal-day:hover{background:var(--bg3);}
+.agenda-cal-day.outro-mes{opacity:.35;}
+.agenda-cal-day.hoje{background:rgba(79,110,247,.08);}
+.agenda-cal-day.hoje .agenda-day-num{color:var(--acc);font-weight:800;}
+.agenda-cal-day.selecionado{background:rgba(79,110,247,.15);border:1px solid rgba(79,110,247,.3);}
+.agenda-day-num{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:4px;}
+.agenda-day-evento{
+  font-size:10px;font-weight:600;padding:2px 5px;border-radius:4px;
+  background:rgba(79,110,247,.2);color:var(--acc);margin-bottom:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.agenda-day-evento.concluido{background:rgba(52,211,153,.15);color:var(--green);}
+.agenda-side{display:flex;flex-direction:column;gap:14px;}
+.agenda-form{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:18px;}
+.agenda-form h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;margin-bottom:14px;color:var(--txt1);}
+.agenda-form .fgrp{margin-bottom:10px;}
+.agenda-form label{font-size:11.5px;color:var(--txt3);font-weight:600;display:block;margin-bottom:4px;}
+.btn-agendar{
+  width:100%;padding:10px;border-radius:var(--radius);font-size:13px;font-weight:700;cursor:pointer;border:none;
+  background:linear-gradient(135deg,var(--acc2),var(--acc3));color:#fff;transition:.2s;margin-top:6px;
+}
+.btn-agendar:hover{opacity:.88;}
+.agenda-lista{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:18px;}
+.agenda-lista h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;margin-bottom:12px;color:var(--txt1);}
+.agenda-evento-item{
+  display:flex;align-items:flex-start;gap:10px;padding:10px 12px;
+  background:var(--bg3);border-radius:9px;margin-bottom:8px;
+  border-left:3px solid var(--acc2);
+}
+.agenda-evento-item.concluido{border-left-color:var(--green);opacity:.7;}
+.agenda-evento-hora{font-size:11px;font-weight:700;color:var(--acc);white-space:nowrap;margin-top:2px;}
+.agenda-evento-info{flex:1;}
+.agenda-evento-pac{font-size:13px;font-weight:700;color:var(--txt1);}
+.agenda-evento-tipo{font-size:11px;color:var(--txt3);margin-top:1px;}
+.agenda-evento-btns{display:flex;gap:5px;flex-shrink:0;}
+.btn-ev-del{background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;padding:2px;border-radius:4px;transition:.15s;}
+.btn-ev-del:hover{color:var(--red);}
+.btn-ev-ok{background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;padding:2px;border-radius:4px;transition:.15s;}
+.btn-ev-ok:hover{color:var(--green);}
+.agenda-vazio{text-align:center;color:var(--txt3);font-size:13px;padding:20px 0;}
 
 /* ── R26 — botão relatório na topbar ── */
 .btn-relatorio{
@@ -886,7 +942,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <p class="bv-sub" id="bvSub">Sistema Fonoaudiológico · Anamnese</p>
     <div class="bv-badge">
       <div class="bv-badge-dot"></div>
-      v15.0 · Sistema Online
+      v19.0 · Sistema Online
     </div>
     <div class="bv-hint"><div class="bv-hint-dot"></div>Clique para entrar</div>
   </div>
@@ -975,7 +1031,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div style="text-align:center;margin-top:18px;">
       <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--txt3);background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:4px 12px;">
         <span style="width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(52,211,153,.6);display:inline-block;"></span>
-        v15.0 · Fono Facilita
+        v19.0 · Fono Facilita
       </span>
     </div>
   </div>
@@ -993,6 +1049,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
         </div>
       </div>
       <button class="sb-menu-btn" id="btnDashboard">📋 Painel Geral</button>
+      <button class="sb-menu-btn" id="btnAgenda" onclick="abrirAgenda()">📅 Agenda</button>
     </div>
     <div class="sb-section" style="padding-bottom:6px;">
       <div class="sb-sec-title">Pacientes Cadastrados</div>
@@ -1026,6 +1083,63 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     </div>
 
     <div class="content-scroll">
+      <!-- R21 — AGENDA DE SESSÕES -->
+      <div id="viewAgenda">
+        <div class="agenda-wrap">
+          <!-- Calendário -->
+          <div class="agenda-cal">
+            <div class="agenda-cal-head">
+              <button class="agenda-cal-nav" onclick="agendaMesAnterior()">‹</button>
+              <h3 id="agendaMesLabel">—</h3>
+              <button class="agenda-cal-nav" onclick="agendaProxMes()">›</button>
+            </div>
+            <div class="agenda-cal-grid" id="agendaCalGrid"></div>
+          </div>
+
+          <div class="agenda-side">
+            <!-- Formulário de agendamento -->
+            <div class="agenda-form">
+              <h3>📅 Novo Agendamento</h3>
+              <div class="fgrp">
+                <label>Paciente</label>
+                <select id="agendaPaciente">
+                  <option value="">Selecione o paciente...</option>
+                </select>
+              </div>
+              <div class="fgrp">
+                <label>Data</label>
+                <input type="date" id="agendaData">
+              </div>
+              <div class="fgrp">
+                <label>Horário</label>
+                <input type="time" id="agendaHora" value="08:00">
+              </div>
+              <div class="fgrp">
+                <label>Tipo de sessão</label>
+                <select id="agendaTipo">
+                  <option>Avaliação inicial</option>
+                  <option>Sessão de terapia</option>
+                  <option>Reavaliação</option>
+                  <option>Alta</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+              <div class="fgrp">
+                <label>Observação (opcional)</label>
+                <textarea id="agendaObs" placeholder="Ex: Trazer exames anteriores..." style="min-height:60px;"></textarea>
+              </div>
+              <button class="btn-agendar" onclick="salvarAgendamento()">+ Agendar Sessão</button>
+            </div>
+
+            <!-- Lista do dia selecionado -->
+            <div class="agenda-lista">
+              <h3 id="agendaListaTitulo">Sessões de hoje</h3>
+              <div id="agendaListaItens"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- PAINEL TABELA -->
       <div id="viewTabela">
 
@@ -2623,11 +2737,19 @@ const authTimeoutFallback = setTimeout(() => {
 onAuthStateChanged(auth, async user => {
   clearTimeout(authTimeout);
   clearTimeout(authTimeoutFallback);
-  // Limpa também o timeout de segurança da tela de boas-vindas
   if (window._authTimeoutBv) clearTimeout(window._authTimeoutBv);
   window._bvOnConcluir(async () => {
     document.getElementById('loadingOverlay').style.display = 'none';
     if (user) {
+      // R35 — Bloquear acesso se e-mail não verificado
+      if (!user.emailVerified) {
+        await signOut(auth);
+        mostrarLogin();
+        setTimeout(() => {
+          $('erroAuth').innerText = '📧 Confirme seu e-mail antes de entrar. Verifique sua caixa de entrada.';
+        }, 100);
+        return;
+      }
       $('telaAuth').style.display    = 'none';
       $('telaSistema').style.display = 'grid';
       $('nomeExib').innerText    = user.displayName || user.email.split('@')[0];
@@ -2666,7 +2788,11 @@ async function acaoAuth() {
       if (senha !== senha2)  { $('erroAuth').innerText = '⚠️ As senhas não conferem.'; throw null; }
       const cred = await createUserWithEmailAndPassword(auth, email, senha);
       if (nome) await updateProfile(cred.user, { displayName: nome });
-      $('okAuth').innerText = '✅ Conta criada com sucesso!';
+      // R35 — Enviar e-mail de verificação
+      await cred.user.sendEmailVerification();
+      await signOut(auth);
+      $('okAuth').innerText = '✅ Conta criada! Verifique seu e-mail para ativar o acesso.';
+      trocarAbaAuth('login');
     } else {
       await signInWithEmailAndPassword(auth, email, senha);
     }
@@ -2680,16 +2806,24 @@ async function acaoAuth() {
 
 function traduzirErro(code) {
   const m = {
-    'auth/email-already-in-use':   '❌ Este e-mail já está cadastrado.',
-    'auth/invalid-email':          '❌ E-mail inválido.',
-    'auth/weak-password':          '❌ Senha fraca. Use pelo menos 8 caracteres, 1 maiúscula e 1 número.',
-    'auth/user-not-found':         '❌ Usuário não encontrado.',
-    'auth/wrong-password':         '❌ Senha incorreta.',
-    'auth/invalid-credential':     '❌ E-mail ou senha incorretos.',
-    'auth/too-many-requests':      '⏳ Muitas tentativas. Aguarde alguns minutos.',
-    'auth/network-request-failed': '🌐 Sem conexão com a internet.',
+    'auth/email-already-in-use':    '❌ Este e-mail já está cadastrado. Tente fazer login.',
+    'auth/invalid-email':           '❌ E-mail inválido. Verifique o formato (ex: nome@email.com).',
+    'auth/weak-password':           '❌ Senha fraca. Use pelo menos 8 caracteres, 1 maiúscula e 1 número.',
+    'auth/user-not-found':          '❌ E-mail não encontrado. Verifique ou crie uma conta.',
+    'auth/wrong-password':          '❌ Senha incorreta. Tente novamente ou redefina sua senha.',
+    'auth/invalid-credential':      '❌ E-mail ou senha incorretos. Verifique e tente novamente.',
+    'auth/too-many-requests':       '⏳ Muitas tentativas. Aguarde alguns minutos antes de tentar novamente.',
+    'auth/network-request-failed':  '🌐 Sem conexão com a internet. Verifique sua rede.',
+    'auth/user-disabled':           '🚫 Esta conta foi desativada. Entre em contato com o administrador.',
+    'auth/requires-recent-login':   '🔒 Por segurança, faça login novamente para continuar.',
+    'auth/email-not-verified':      '📧 E-mail não verificado. Confirme seu e-mail antes de entrar.',
+    'auth/operation-not-allowed':   '🚫 Operação não permitida. Entre em contato com o administrador.',
+    'auth/expired-action-code':     '⏳ Link expirado. Solicite um novo e-mail de verificação.',
+    'auth/invalid-action-code':     '❌ Link inválido. Solicite um novo e-mail de verificação.',
+    'auth/missing-email':           '⚠️ Informe o e-mail.',
+    'auth/missing-password':        '⚠️ Informe a senha.',
   };
-  return m[code] || '❌ Erro: ' + (code || 'desconhecido');
+  return m[code] || '❌ Erro inesperado. Tente novamente ou recarregue a página.';
 }
 
 $('btnSair').addEventListener('click', async () => { await signOut(auth); });
@@ -2741,7 +2875,7 @@ async function carregarPacientes() {
   } catch(e) {
     console.error(e);
     setCloud('err');
-    toast('⚠️ Erro ao carregar pacientes.', true);
+    toast('⚠️ Erro ao carregar pacientes. Verifique sua conexão e tente novamente.', true);
   }
 }
 
@@ -2769,7 +2903,7 @@ async function salvarPacienteFirestore(dados) {
   } catch(e) {
     console.error(e);
     setCloud('err');
-    toast('❌ Erro ao salvar no Firebase.', true);
+    toast('❌ Erro ao salvar. Verifique sua conexão e tente novamente.', true);
     return null;
   }
 }
@@ -2891,6 +3025,7 @@ function irTabela() {
   clearTimeout(autoSaveTimer);
   $('viewFormulario').style.display = 'none';
   $('viewTabela').style.display = 'block';
+  $('viewAgenda').style.display = 'none';
   $('btnNovo').style.display = 'flex';
   $('tituloPag').innerText = 'Pacientes e Anamneses';
   $('formAnamnese').reset();
@@ -4721,6 +4856,205 @@ function abrirDashboard() {
   $('dashboardOverlay').classList.add('open');
 }
 function fecharDashboard() { $('dashboardOverlay').classList.remove('open'); }
+
+// ══════════════════════════════════════════════════════════
+// R21 — AGENDA DE SESSÕES
+// ══════════════════════════════════════════════════════════
+let agendaAgendamentos = JSON.parse(localStorage.getItem('fonoAgenda') || '[]');
+let agendaAnoAtual = new Date().getFullYear();
+let agendaMesAtual = new Date().getMonth();
+let agendaDiaSel  = new Date().toISOString().slice(0,10);
+
+function salvarAgenda() {
+  try { localStorage.setItem('fonoAgenda', JSON.stringify(agendaAgendamentos)); } catch(e) {}
+}
+
+function abrirAgenda() {
+  $('viewTabela').style.display    = 'none';
+  $('viewFormulario').style.display = 'none';
+  $('viewAgenda').style.display    = 'block';
+  $('tituloPag').innerText = 'Agenda de Sessões';
+  $('btnNovo').style.display = 'none';
+  // Popular select de pacientes
+  const sel = $('agendaPaciente');
+  sel.innerHTML = '<option value="">Selecione o paciente...</option>';
+  (pacientesCache||[]).forEach(p => {
+    const op = document.createElement('option');
+    op.value = p.firestoreId; op.textContent = p.nome||'—';
+    sel.appendChild(op);
+  });
+  // Data padrão = hoje
+  $('agendaData').value = agendaDiaSel;
+  agendaAnoAtual = new Date().getFullYear();
+  agendaMesAtual = new Date().getMonth();
+  agendaRenderCal();
+  agendaRenderLista(agendaDiaSel);
+}
+
+function agendaMesAnterior() {
+  agendaMesAtual--;
+  if (agendaMesAtual < 0) { agendaMesAtual = 11; agendaAnoAtual--; }
+  agendaRenderCal();
+}
+function agendaProxMes() {
+  agendaMesAtual++;
+  if (agendaMesAtual > 11) { agendaMesAtual = 0; agendaAnoAtual++; }
+  agendaRenderCal();
+}
+
+function agendaRenderCal() {
+  const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const DIAS  = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  $('agendaMesLabel').textContent = `${MESES[agendaMesAtual]} ${agendaAnoAtual}`;
+
+  const grid = $('agendaCalGrid');
+  grid.innerHTML = '';
+
+  // Cabeçalho dias da semana
+  DIAS.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'agenda-cal-dow'; el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const hoje = new Date().toISOString().slice(0,10);
+  const primeiroDia = new Date(agendaAnoAtual, agendaMesAtual, 1);
+  const ultimoDia  = new Date(agendaAnoAtual, agendaMesAtual+1, 0);
+  let startDow = primeiroDia.getDay();
+
+  // Dias do mês anterior
+  for (let i=0; i<startDow; i++) {
+    const d = new Date(agendaAnoAtual, agendaMesAtual, -startDow+i+1);
+    const el = document.createElement('div');
+    el.className = 'agenda-cal-day outro-mes';
+    el.innerHTML = `<div class="agenda-day-num">${d.getDate()}</div>`;
+    grid.appendChild(el);
+  }
+
+  // Dias do mês atual
+  for (let dia=1; dia<=ultimoDia.getDate(); dia++) {
+    const dateStr = `${agendaAnoAtual}-${String(agendaMesAtual+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+    const eventos = agendaAgendamentos.filter(a => a.data === dateStr);
+    const el = document.createElement('div');
+    el.className = 'agenda-cal-day' + (dateStr===hoje?' hoje':'') + (dateStr===agendaDiaSel?' selecionado':'');
+    el.innerHTML = `<div class="agenda-day-num">${dia}</div>` +
+      eventos.slice(0,2).map(e => {
+        const pac = (pacientesCache||[]).find(p=>p.firestoreId===e.pacienteId);
+        return `<div class="agenda-day-evento${e.concluido?' concluido':''}">${pac?.nome?.split(' ')[0]||'Sessão'}</div>`;
+      }).join('') +
+      (eventos.length>2?`<div class="agenda-day-evento">+${eventos.length-2}</div>`:'');
+    el.onclick = () => {
+      agendaDiaSel = dateStr;
+      $('agendaData').value = dateStr;
+      agendaRenderCal();
+      agendaRenderLista(dateStr);
+    };
+    grid.appendChild(el);
+  }
+
+  // Completar última linha
+  const totalCells = startDow + ultimoDia.getDate();
+  const resto = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+  for (let i=1; i<=resto; i++) {
+    const el = document.createElement('div');
+    el.className = 'agenda-cal-day outro-mes';
+    el.innerHTML = `<div class="agenda-day-num">${i}</div>`;
+    grid.appendChild(el);
+  }
+}
+
+function agendaRenderLista(dateStr) {
+  const MESES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  const [ano,mes,dia] = dateStr.split('-');
+  $('agendaListaTitulo').textContent = `Sessões — ${dia} ${MESES[parseInt(mes)-1]} ${ano}`;
+  const container = $('agendaListaItens');
+  container.innerHTML = '';
+  const eventos = agendaAgendamentos.filter(a => a.data === dateStr).sort((a,b)=>a.hora.localeCompare(b.hora));
+  if (!eventos.length) {
+    container.innerHTML = '<div class="agenda-vazio">Nenhuma sessão neste dia.</div>';
+    return;
+  }
+  eventos.forEach(ev => {
+    const pac = (pacientesCache||[]).find(p=>p.firestoreId===ev.pacienteId);
+    const div = document.createElement('div');
+    div.className = 'agenda-evento-item' + (ev.concluido?' concluido':'');
+    div.innerHTML = `
+      <div class="agenda-evento-hora">${ev.hora}</div>
+      <div class="agenda-evento-info">
+        <div class="agenda-evento-pac">${esc(pac?.nome||'Paciente')}</div>
+        <div class="agenda-evento-tipo">${esc(ev.tipo)}${ev.obs?` · ${esc(ev.obs.slice(0,40))}`:''}
+        </div>
+      </div>
+      <div class="agenda-evento-btns">
+        <button class="btn-ev-ok" title="Google Calendar" onclick="agendaAbrirGoogleCal(agendaAgendamentos.find(a=>a.id==='${ev.id}'),(pacientesCache||[]).find(p=>p.firestoreId==='${ev.pacienteId}'))" style="font-size:14px;">📅</button>
+        <button class="btn-ev-ok" title="${ev.concluido?'Reabrir':'Concluir'}" onclick="agendaToggleConcluido('${ev.id}')">${ev.concluido?'↩':'✓'}</button>
+        <button class="btn-ev-del" title="Excluir" onclick="agendaExcluir('${ev.id}')">🗑</button>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function salvarAgendamento() {
+  const pacId = $('agendaPaciente').value;
+  const data  = $('agendaData').value;
+  const hora  = $('agendaHora').value;
+  const tipo  = $('agendaTipo').value;
+  const obs   = $('agendaObs').value.trim();
+  if (!pacId) { toast('⚠️ Selecione um paciente.', true); return; }
+  if (!data)  { toast('⚠️ Selecione uma data.', true); return; }
+  if (!hora)  { toast('⚠️ Informe o horário.', true); return; }
+  const novo = { id: Date.now().toString(), pacienteId: pacId, data, hora, tipo, obs, concluido: false, criadoEm: new Date().toISOString() };
+  agendaAgendamentos.push(novo);
+  salvarAgenda();
+  agendaDiaSel = data;
+  const [ano,mes] = data.split('-');
+  agendaAnoAtual = parseInt(ano); agendaMesAtual = parseInt(mes)-1;
+  agendaRenderCal();
+  agendaRenderLista(data);
+  $('agendaPaciente').value = ''; $('agendaObs').value = '';
+  // R28 — Oferecer adição ao Google Calendar
+  const pac = (pacientesCache||[]).find(p=>p.firestoreId===pacId);
+  agendaAbrirGoogleCal(novo, pac);
+  toast('✅ Sessão agendada!');
+}
+
+// R28 — Gerar link do Google Calendar
+function agendaAbrirGoogleCal(ev, pac) {
+  const nome = pac?.nome || 'Paciente';
+  const titulo = encodeURIComponent(`${ev.tipo} — ${nome}`);
+  const desc   = encodeURIComponent(`Tipo: ${ev.tipo}\nPaciente: ${nome}${ev.obs?'\nObs: '+ev.obs:''}\n\nFono Facilita`);
+
+  // Formatar data/hora para o formato do Google Calendar: YYYYMMDDTHHMMSS
+  const [ano,mes,dia] = ev.data.split('-');
+  const [hora,min]    = ev.hora.split(':');
+  const inicio = `${ano}${mes}${dia}T${hora}${min}00`;
+  // Duração padrão de 50 minutos
+  const fimDate = new Date(parseInt(ano), parseInt(mes)-1, parseInt(dia), parseInt(hora), parseInt(min)+50);
+  const fimAno  = fimDate.getFullYear();
+  const fimMes  = String(fimDate.getMonth()+1).padStart(2,'0');
+  const fimDia  = String(fimDate.getDate()).padStart(2,'0');
+  const fimHora = String(fimDate.getHours()).padStart(2,'0');
+  const fimMin  = String(fimDate.getMinutes()).padStart(2,'0');
+  const fim = `${fimAno}${fimMes}${fimDia}T${fimHora}${fimMin}00`;
+
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${inicio}/${fim}&details=${desc}`;
+
+  if (confirm('Deseja adicionar esta sessão ao Google Calendar?')) {
+    window.open(url, '_blank');
+  }
+}
+
+function agendaToggleConcluido(id) {
+  const ev = agendaAgendamentos.find(a=>a.id===id);
+  if (ev) { ev.concluido = !ev.concluido; salvarAgenda(); agendaRenderCal(); agendaRenderLista(agendaDiaSel); }
+}
+
+function agendaExcluir(id) {
+  if (!confirm('Excluir este agendamento?')) return;
+  agendaAgendamentos = agendaAgendamentos.filter(a=>a.id!==id);
+  salvarAgenda(); agendaRenderCal(); agendaRenderLista(agendaDiaSel);
+  toast('🗑 Agendamento removido.');
+}
 
 // ══════════════════════════════════════════════════════════
 // R22 — GRÁFICO DE EVOLUÇÃO DAS PONTUAÇÕES
