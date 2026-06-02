@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fono Facilita v37 — Fonoaudiologia</title>
+<title>Fono Facilita v38 — Fonoaudiologia</title>
 <!-- preconnect acelera DNS/TLS antecipadamente -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -777,7 +777,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <p class="bv-sub" id="bvSub">Sistema Fonoaudiológico · Anamnese</p>
     <div class="bv-badge">
       <div class="bv-badge-dot"></div>
-      v37.0 · Sistema Online
+      v38.0 · Sistema Online
     </div>
     <div class="bv-hint"><div class="bv-hint-dot"></div>Clique para entrar</div>
   </div>
@@ -864,7 +864,7 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
     <div style="text-align:center;margin-top:18px;">
       <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--txt3);background:var(--bg3);border:1px solid var(--border);border-radius:99px;padding:4px 12px;">
         <span style="width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(52,211,153,.6);display:inline-block;"></span>
-        v37.0 · Fono Facilita
+        v38.0 · Fono Facilita
       </span>
     </div>
   </div>
@@ -2207,6 +2207,33 @@ hr.div{border:none;border-top:1px solid var(--border);margin:20px 0;}
 window.$ = function(id) { return document.getElementById(id); };
 window.renderStats = function() {}; // será sobrescrito pelo módulo
 
+// Fila de chamadas pendentes — executadas quando módulo estiver pronto
+window._moduloPronto = false;
+window._filaModulo = [];
+window._executarOuEnfileirar = function(fn) {
+  if (window._moduloPronto) { fn(); }
+  else { window._filaModulo.push(fn); }
+};
+
+// Stubs que enfileiram até o módulo estar pronto
+window.abrirRelatorio       = function()  { window._executarOuEnfileirar(function(){ window._abrirRelatorio(); }); };
+window.abrirDashboard       = function()  { window._executarOuEnfileirar(function(){ window._abrirDashboard(); }); };
+window.fecharRelatorio      = function()  { window._executarOuEnfileirar(function(){ window._fecharRelatorio(); }); };
+window.fecharDashboard      = function()  { window._executarOuEnfileirar(function(){ window._fecharDashboard(); }); };
+window._exportarRelatorioCSV = function()  { window._executarOuEnfileirar(function(){ window._exportarRelatorioCSV(); }); };
+window.abrirGraficoEvolucao = function(p) { window._executarOuEnfileirar(function(){ window._abrirGraficoEvolucao(p); }); };
+window.fecharGraficoEvolucao= function()  { window._executarOuEnfileirar(function(){ window._fecharGraficoEvolucao(); }); };
+window.abrirSupervisao      = function()  { window._executarOuEnfileirar(function(){ window._abrirSupervisao(); }); };
+window.fecharSupervisao     = function()  { window._executarOuEnfileirar(function(){ window._fecharSupervisao(); }); };
+window.enviarSupervisao     = function()  { window._executarOuEnfileirar(function(){ window._enviarSupervisao(); }); };
+window.salvarAgendamento    = function()  { window._executarOuEnfileirar(function(){ window._salvarAgendamento(); }); };
+window.agendaMesAnterior    = function()  { window._executarOuEnfileirar(function(){ window._agendaMesAnterior(); }); };
+window.agendaProxMes        = function()  { window._executarOuEnfileirar(function(){ window._agendaProxMes(); }); };
+window.agendaConcluir       = function(id){ window._executarOuEnfileirar(function(){ window._agendaConcluir(id); }); };
+window.agendaExcluir        = function(id){ window._executarOuEnfileirar(function(){ window._agendaExcluir(id); }); };
+window.agendaGCal           = function(id){ window._executarOuEnfileirar(function(){ window._agendaGCal(id); }); };
+window.gerarPDF             = function(p) { window._executarOuEnfileirar(function(){ window._gerarPDF(p); }); };
+
 (function() {
   let boasVindasConcluidas = false;
   let firebaseCallback = null;
@@ -3312,6 +3339,7 @@ $('arquivoJson').addEventListener('change', async function() {
 // Função unificada — modo 'download' salva o arquivo, modo 'base64' retorna string para e-mail
 async function _gerarPDFInterno(p, modo) {
   if (!p) return null;
+  console.log('PDF DEBUG — paciente:', JSON.stringify({nome:p.nome, idade:p.idade, sexo:p.sexo, queixa:p.queixa, firestoreId:p.firestoreId}));
   try { await carregarJsPDF(); } catch { return null; }
   const {jsPDF} = window.jspdf;
   const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
@@ -3538,7 +3566,7 @@ async function _gerarPDFInterno(p, modo) {
   return true;
 }
 
-window.gerarPDF = async function(p) {
+window._gerarPDF = async function(p) {
   if (!p) { toast('❌ Nenhum paciente selecionado.', true); return; }
   toast('⏳ Preparando PDF... (nome: ' + (p.nome||'VAZIO') + ')');
   const ok = await _gerarPDFInterno(p, 'download');
@@ -4361,8 +4389,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ══════════════════════════════════════════════════════════
 
 // ── Relatório ──
-window.fecharRelatorio = function() { $('modalRelatorio').classList.remove('open'); };
-window.abrirRelatorio = function() {
+window._fecharRelatorio = function() { $('modalRelatorio').classList.remove('open'); };
+window._abrirRelatorio = function() {
   const lista = pacientesCache || [];
   const total = lista.length;
   const masc = lista.filter(p=>p.sexo==='Masculino').length;
@@ -4382,7 +4410,7 @@ window.abrirRelatorio = function() {
     <div class="bar-section"><div class="bar-section-title">Cadastros por mês</div>${bars(mArr,Math.max(...mArr.map(e=>e[1]),1))}</div>`;
   $('modalRelatorio').classList.add('open');
 };
-window.exportarRelatorioCSV = function() {
+window._exportarRelatorioCSV = function() {
   const lista=pacientesCache||[];
   const linhas=[['Nome','Sexo','Status','Convênio']];
   lista.forEach(p=>linhas.push([p.nome||'—',p.sexo||'—',p.status||'—',p.convenio||'—']));
@@ -4392,8 +4420,8 @@ window.exportarRelatorioCSV = function() {
 };
 
 // ── Dashboard ──
-window.fecharDashboard = function() { $('modalDashboard').classList.remove('open'); };
-window.abrirDashboard = function() {
+window._fecharDashboard = function() { $('modalDashboard').classList.remove('open'); };
+window._abrirDashboard = function() {
   const lista=pacientesCache||[];
   const total=lista.length, conc=lista.filter(p=>p.status==='Concluído').length;
   const andamento=lista.filter(p=>p.status!=='Concluído').length;
@@ -4418,8 +4446,8 @@ window.abrirDashboard = function() {
 
 // ── Supervisão ──
 let _pacSupv = null;
-window.fecharSupervisao = function() { $('modalSupervisao').classList.remove('open'); };
-window.abrirSupervisao = function() {
+window._fecharSupervisao = function() { $('modalSupervisao').classList.remove('open'); };
+window._abrirSupervisao = function() {
   const editId=$('formAnamnese').getAttribute('data-edit-id');
   _pacSupv=editId?(pacientesCache||[]).find(p=>p.firestoreId===editId):null;
   if(!_pacSupv){toast('⚠️ Salve a ficha antes de enviar.',true);return;}
@@ -4428,7 +4456,7 @@ window.abrirSupervisao = function() {
   $('supervisaoEmail').value='';$('supervisaoObs').value='';
   $('modalSupervisao').classList.add('open');
 };
-window.enviarSupervisao = function() {
+window._enviarSupervisao = function() {
   const email=$('supervisaoEmail').value.trim();
   if(!email||!email.includes('@')){toast('⚠️ Informe um e-mail válido.',true);return;}
   const p=_pacSupv||{};
@@ -4442,8 +4470,8 @@ window.enviarSupervisao = function() {
 // ── Gráfico Evolução ──
 const CHART_SERIES=[{key:'procTotGeral',label:'PROC Total',color:'#4f6ef7'},{key:'procTotHab',label:'PROC Hab.',color:'#34d399'},{key:'tvipEscore',label:'TVIP',color:'#a78bfa'}];
 let _chartSerieAtiva='procTotGeral',_chartPac=null;
-window.fecharGraficoEvolucao=function(){$('modalGrafico').classList.remove('open');};
-window.abrirGraficoEvolucao=function(pac){
+window._fecharGraficoEvolucao=function(){$('modalGrafico').classList.remove('open');};
+window._abrirGraficoEvolucao=function(pac){
   _chartPac=pac;_chartSerieAtiva='procTotGeral';
   const sel=$('chartSelector');sel.innerHTML='';
   CHART_SERIES.forEach(s=>{const btn=document.createElement('button');btn.className='chart-tab'+(s.key===_chartSerieAtiva?' ativa':'');btn.textContent=s.label;btn.onclick=()=>{_chartSerieAtiva=s.key;sel.querySelectorAll('.chart-tab').forEach(b=>b.classList.remove('ativa'));btn.classList.add('ativa');window.desenharGrafico();};sel.appendChild(btn);});
@@ -4515,18 +4543,18 @@ function agendaRenderLista(ds){
   if(!evs.length){cont.innerHTML='<div style="text-align:center;color:var(--txt3);font-size:13px;padding:16px;">Nenhuma sessão.</div>';return;}
   evs.forEach(ev=>{const pac=(pacientesCache||[]).find(p=>p.firestoreId===ev.pacienteId);const div=document.createElement('div');div.className='agenda-evento-item'+(ev.concluido?' concluido':'');div.innerHTML=`<div class="agenda-evento-hora">${ev.hora}</div><div style="flex:1;"><div class="agenda-evento-pac">${pac?.nome||'—'}</div><div class="agenda-evento-tipo">${ev.tipo}</div></div><div style="display:flex;gap:4px;"><button class="btn-ev" onclick="window.agendaGCal('${ev.id}')">📅</button><button class="btn-ev" onclick="window.agendaConcluir('${ev.id}')">${ev.concluido?'↩':'✓'}</button><button class="btn-ev" onclick="window.agendaExcluir('${ev.id}')">🗑</button></div>`;cont.appendChild(div);});
 }
-window.salvarAgendamento=function(){
+window._salvarAgendamento=function(){
   const pacId=$('agendaPaciente').value,data=$('agendaData').value,hora=$('agendaHora').value,tipo=$('agendaTipo').value,obs=$('agendaObs').value.trim();
   if(!pacId){toast('⚠️ Selecione um paciente.',true);return;}if(!data){toast('⚠️ Selecione uma data.',true);return;}
   agendaAgendamentos.push({id:Date.now().toString(),pacienteId:pacId,data,hora,tipo,obs,concluido:false});salvarAgenda();
   agendaDiaSel=data;const[a,m]=data.split('-');agendaAno=parseInt(a);agendaMes=parseInt(m)-1;agendaRenderCal();agendaRenderLista(data);
   $('agendaPaciente').value='';$('agendaObs').value='';toast('✅ Sessão agendada!');
 };
-window.agendaMesAnterior=function(){agendaMes--;if(agendaMes<0){agendaMes=11;agendaAno--;}agendaRenderCal();};
-window.agendaProxMes=function(){agendaMes++;if(agendaMes>11){agendaMes=0;agendaAno++;}agendaRenderCal();};
-window.agendaConcluir=function(id){const ev=agendaAgendamentos.find(a=>a.id===id);if(ev){ev.concluido=!ev.concluido;salvarAgenda();agendaRenderCal();agendaRenderLista(agendaDiaSel);}};
-window.agendaExcluir=function(id){if(!confirm('Excluir?'))return;agendaAgendamentos=agendaAgendamentos.filter(a=>a.id!==id);salvarAgenda();agendaRenderCal();agendaRenderLista(agendaDiaSel);toast('🗑 Removido.');};
-window.agendaGCal=function(id){const ev=agendaAgendamentos.find(a=>a.id===id);if(!ev)return;const pac=(pacientesCache||[]).find(p=>p.firestoreId===ev.pacienteId);const titulo=encodeURIComponent(`${ev.tipo} — ${pac?.nome||'Paciente'}`);const[a,m,d]=ev.data.split('-');const[h,mi]=ev.hora.split(':');const inicio=`${a}${m}${d}T${h}${mi}00`;const fim=new Date(parseInt(a),parseInt(m)-1,parseInt(d),parseInt(h),parseInt(mi)+50);const fimStr=`${fim.getFullYear()}${String(fim.getMonth()+1).padStart(2,'0')}${String(fim.getDate()).padStart(2,'0')}T${String(fim.getHours()).padStart(2,'0')}${String(fim.getMinutes()).padStart(2,'0')}00`;window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${inicio}/${fimStr}`,'_blank');};
+window._agendaMesAnterior=function(){agendaMes--;if(agendaMes<0){agendaMes=11;agendaAno--;}agendaRenderCal();};
+window._agendaProxMes=function(){agendaMes++;if(agendaMes>11){agendaMes=0;agendaAno++;}agendaRenderCal();};
+window._agendaConcluir=function(id){const ev=agendaAgendamentos.find(a=>a.id===id);if(ev){ev.concluido=!ev.concluido;salvarAgenda();agendaRenderCal();agendaRenderLista(agendaDiaSel);}};
+window._agendaExcluir=function(id){if(!confirm('Excluir?'))return;agendaAgendamentos=agendaAgendamentos.filter(a=>a.id!==id);salvarAgenda();agendaRenderCal();agendaRenderLista(agendaDiaSel);toast('🗑 Removido.');};
+window._agendaGCal=function(id){const ev=agendaAgendamentos.find(a=>a.id===id);if(!ev)return;const pac=(pacientesCache||[]).find(p=>p.firestoreId===ev.pacienteId);const titulo=encodeURIComponent(`${ev.tipo} — ${pac?.nome||'Paciente'}`);const[a,m,d]=ev.data.split('-');const[h,mi]=ev.hora.split(':');const inicio=`${a}${m}${d}T${h}${mi}00`;const fim=new Date(parseInt(a),parseInt(m)-1,parseInt(d),parseInt(h),parseInt(mi)+50);const fimStr=`${fim.getFullYear()}${String(fim.getMonth()+1).padStart(2,'0')}${String(fim.getDate()).padStart(2,'0')}T${String(fim.getHours()).padStart(2,'0')}${String(fim.getMinutes()).padStart(2,'0')}00`;window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${inicio}/${fimStr}`,'_blank');};
 
 // ── Botões via addEventListener (dentro do módulo) ──
 document.addEventListener('DOMContentLoaded',()=>{
@@ -4542,6 +4570,11 @@ document.addEventListener('DOMContentLoaded',()=>{
 const _origRenderStats = renderStats;
 window.renderStats = function(l) { _origRenderStats(l); verificarNotificacoes(l); };
 renderStats = window.renderStats;
+
+// ── MÓDULO PRONTO — executar fila de chamadas pendentes ──
+window._moduloPronto = true;
+window._filaModulo.forEach(function(fn) { try { fn(); } catch(e) { console.error(e); } });
+window._filaModulo = [];
 </script>
 
 <!-- Modal Relatório -->
